@@ -2,6 +2,8 @@
 
 Personal repo for FullStackOpen's Full Stack tutorial for React, Redux, Node.js, MongoDB, GraphQL and TypeScript.
 
+[Link to course content](https://fullstackopen.com/en/#course-contents)
+
 | Section | Title | Completion |
 | --------| ----- | ---------- |
 | Part 0  | Fundamentals of Web apps | Completed |
