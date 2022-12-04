@@ -1,6 +1,6 @@
 const Note = ({ note, handleImportanceChange }) => {
   return (
-    <li>
+    <li className="note">
       {note.content}
       <button onClick={() => handleImportanceChange(note.id)}>
         make {!note.important ? "not important" : "important"}
