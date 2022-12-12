@@ -21,7 +21,15 @@ const Note = mongoose.model("Note", noteSchema);
 
 mongoose
   .connect(url)
-  .then((result) => {
+  .then(
+    Note.find({ important: true }).then((result) => {
+      result.forEach((note) => {
+        console.log(note);
+      });
+      mongoose.connection.close();
+    })
+  )
+  /* .then((result) => {
     console.log("connected");
 
     const note = new Note({
@@ -35,5 +43,5 @@ mongoose
   .then(() => {
     console.log("note saved!");
     return mongoose.connection.close();
-  })
+  }) */
   .catch((error) => console.log(error));
