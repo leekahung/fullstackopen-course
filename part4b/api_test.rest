@@ -1,0 +1,38 @@
+GET http://localhost:3001/api/data
+
+###
+GET http://localhost:3001/api/data/63946077b2c77e16eba069e1
+
+###
+GET http://localhost:3001/api/data/1
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "content": "New Note"
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "important": "New Note"
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "content": "Something",
+  "important": false
+}
+
+###
+DELETE http://localhost:3001/api/data/639bbbc5cd76dba2cb8b0d10
+
+###
+GET http://localhost:3001/api/data/639bbb67dc2ef7a7a7ac65f1
