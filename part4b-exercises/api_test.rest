@@ -1,7 +1,7 @@
 GET http://localhost:3001/api/data
 
 ###
-DELETE http://localhost:3001/api/data/639c4db33561f2b6f1e582d2
+DELETE http://localhost:3001/api/data/639d4cb31fe833f42c264ffa
 
 ###
 POST http://localhost:3001/api/data
@@ -65,3 +65,17 @@ Content-Type: application/json
   "url": "some url",
   "likes": 999
 }
+
+###
+PUT http://localhost:3001/api/data/639c4ccedca5be7aeea946e7
+Content-Type: application/json
+
+{
+  "title": "Hello World",
+  "author": "Alice",
+  "url": "some url",
+  "likes": 50
+}
+
+###
+GET http://localhost:3001/api/data

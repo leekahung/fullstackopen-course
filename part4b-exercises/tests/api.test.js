@@ -7,10 +7,7 @@ const helper = require("./helperList");
 
 beforeEach(async () => {
   await Blog.deleteMany({});
-
-  const blogObjects = helper.initialBlogs.map((blog) => new Blog(blog));
-  const promiseArray = blogObjects.map((blog) => blog.save());
-  await Promise.all(promiseArray);
+  await Blog.insertMany(helper.initialBlogs);
 });
 
 test("return all blogs as json", async () => {
@@ -18,7 +15,7 @@ test("return all blogs as json", async () => {
     .get("/api/data")
     .expect(200)
     .expect("Content-Type", /application\/json/);
-});
+}, 1000000);
 
 test("verify unique identifier property is defined as id", async () => {
   const blogs = await api.get("/api/data");
@@ -70,6 +67,35 @@ test("if title or url is missing from request, return 400 Bad Request", async ()
 
   const response = await api.get("/api/data");
   expect(response.body).toHaveLength(helper.initialBlogs.length);
+});
+
+test("deleting existing blog from list returns 204", async () => {
+  const blogs = await api.get("/api/data");
+  const blogToDelete = blogs.body[0];
+
+  await api.delete(`/api/data/${blogToDelete.id}`).expect(204);
+
+  const updatedBlogs = await api.get("/api/data");
+  expect(updatedBlogs.body).toHaveLength(helper.initialBlogs.length - 1);
+});
+
+test("updating existing blog likes from list return updated blogs likes + 1", async () => {
+  const blogs = await api.get("/api/data");
+  const blogToUpdate = blogs.body[0];
+  const updatedBlog = {
+    ...blogToUpdate,
+    likes: blogToUpdate.likes + 1,
+  };
+
+  await api
+    .put(`/api/data/${blogToUpdate.id}`, updatedBlog)
+    .send(updatedBlog)
+    .expect(200);
+
+  const updatedBlogsList = await api.get("/api/data");
+  expect(updatedBlogsList.body[0].likes).toBe(helper.initialBlogs[0].likes + 1);
+
+  expect(updatedBlogsList.body[0]).toEqual(updatedBlog);
 });
 
 afterAll(() => {
