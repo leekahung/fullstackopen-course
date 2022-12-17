@@ -18,11 +18,9 @@ notesRouter.get("/:id", async (request, response) => {
 notesRouter.post("/", async (request, response) => {
   const body = request.body;
 
-  const note = new Note({
-    content: body.content,
-    date: new Date(),
-    important: body.important || false,
-  });
+  const note = body.important
+    ? new Note({ ...body, date: new Date() })
+    : new Note({ ...body, date: new Date(), important: false });
 
   const savedNote = await note.save();
   response.status(201).json(savedNote);
