@@ -1,0 +1,67 @@
+GET http://localhost:3001/api/data
+
+###
+DELETE http://localhost:3001/api/data/639c4db33561f2b6f1e582d2
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "title": "Hello World"
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "title": "Hello World",
+  "author": "Alice",
+  "url": "some url",
+  "likes": 50
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "title": "Mongo Mongo",
+  "author": "Bob",
+  "url": "some url",
+  "likes": 20
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "title": "Stacking books",
+  "author": "Carl",
+  "url": "some url",
+  "likes": 2
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "title": "Rock Climbing",
+  "author": "Alice",
+  "url": "some url",
+  "likes": 12
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "title": "Delete this",
+  "author": "ToBeRemoved",
+  "url": "some url",
+  "likes": 999
+}
