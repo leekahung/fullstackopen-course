@@ -8,7 +8,8 @@ app.use(express.json());
 const mongoose = require("mongoose");
 const config = require("./utils/config");
 const middleware = require("./utils/middleware");
-const noteRouter = require("./controllers/notes");
+const notesRouter = require("./controllers/notes");
+const usersRouter = require("./controllers/users");
 
 console.log("Connecting to MongoDB...");
 
@@ -22,7 +23,8 @@ mongoose
   });
 
 app.use(middleware.middlewareLogger);
-app.use("/api/data", noteRouter);
+app.use("/api/notes", notesRouter);
+app.use("/api/users", usersRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
