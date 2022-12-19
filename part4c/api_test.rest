@@ -1,0 +1,62 @@
+GET http://localhost:3001/api/data
+
+###
+GET http://localhost:3001/api/data/1
+
+###
+GET http://localhost:3001/api/data/63946077b2c77e16eba069e1
+
+###
+GET http://localhost:3001/somePath/
+
+###
+PUT http://localhost:3001/api/data/63946077b2c77e16eba069e1
+Content-Type: application/json
+
+{
+  "content": "HTML is Easy",
+  "important": false
+}
+
+###
+PUT http://localhost:3001/api/data/63946077b2c77e16eba069e1
+Content-Type: application/json
+
+{
+  "content": "HTML is Easy",
+  "important": true
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "content": "New Note to Add"
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "important": true
+}
+
+###
+POST http://localhost:3001/api/data
+Content-Type: application/json
+
+{
+  "content": "New note to add",
+  "important": true
+}
+
+###
+GET http://localhost:3001/api/data
+
+###
+DELETE http://localhost:3001/api/data/1
+
+###
+DELETE http://localhost:3001/api/data/63a032a7255953fa790967d7
