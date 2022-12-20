@@ -9,6 +9,7 @@ app.use(express.json());
 const mongoose = require("mongoose");
 const config = require("./utils/config");
 const middleware = require("./utils/middleware");
+const loginRouter = require("./controllers/login");
 const notesRouter = require("./controllers/notes");
 const usersRouter = require("./controllers/users");
 
@@ -24,6 +25,7 @@ mongoose
   });
 
 app.use(middleware.middlewareLogger);
+app.use("/api/login", loginRouter);
 app.use("/api/notes", notesRouter);
 app.use("/api/users", usersRouter);
 app.use(middleware.errorHandler);
