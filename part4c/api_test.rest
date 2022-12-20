@@ -79,7 +79,27 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "username": "blahblah",
-  "name": "Blah",
+  "username": "aceui",
+  "name": "Alice Ceui",
   "password": "yay"
+}
+
+###
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+  "content":"User id of the note creator is at the start sent along the request",
+  "important": true,
+  "userId": "63a03e87f9c121bed155b07b"
+}
+
+###
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+  "content": "The existing code and tests need to be changed when users are added to the system",
+  "important": true,
+  "userId": "63a115a4e7c4afcd91d3fed5"
 }
