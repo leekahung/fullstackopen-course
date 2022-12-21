@@ -1,0 +1,77 @@
+GET http://localhost:3001/api/blogs
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Book stacking",
+  "author": "Carl",
+  "url": "some url",
+  "likes": 2,
+  "userId": "63a252ce6384ac786c98b7f4"
+}
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Test",
+  "author": "Alice",
+  "url": "some url",
+  "userId": "63a252c56384ac786c98b7ee"
+}
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "username": "aceui",
+  "name": "Alice",
+  "password": "yay"
+}
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "username": "bobIsCool",
+  "name": "Bob",
+  "password": "cool"
+}
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "username": "carl",
+  "name": "Carl",
+  "password": "carl"
+}
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "username": "Dy",
+  "name": "Dory",
+  "password": "DoryPass"
+}
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "username": "DoryLongName",
+  "name": "Dory",
+  "password": "Dye"
+}
+
+###
+GET http://localhost:3001/api/users
