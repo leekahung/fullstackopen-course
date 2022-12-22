@@ -10,8 +10,8 @@ Personal repo for FullStackOpen's Full Stack tutorial for React, Redux, Node.js,
 | Part 1  | Introduction to React | Completed |
 | Part 2  | Communicating with server | Completed |
 | Part 3  | Programming a server with NodeJS and Express | Completed |
-| Part 4  | Testing Express servers, user administation | In Progress |
-| Part 5  | Testing React apps | Incomplete |
+| Part 4  | Testing Express servers, user administation | Completed |
+| Part 5  | Testing React apps | In Progress |
 | Part 6  | State management with Redux | Incomplete |
 | Part 7  | React router, custom hooks, styling app with CSS and webpack | Incomplete |
 | Part 8  | GraphQL | Incomplete |
