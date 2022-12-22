@@ -5,8 +5,6 @@ const app = require("../index");
 const http = require("http");
 const server = http.createServer(app);
 const api = supertest(server);
-const Blog = require("../models/blog");
-const { before } = require("lodash");
 
 test("return all blogs as json after logging in", async () => {
   await api
@@ -112,10 +110,7 @@ test("Return 401 Unauthorized if token is not provided when POST request is made
     url: "some url",
   };
 
-  await api
-    .post("/api/blogs")
-    .send(newBlog)
-    .expect(401)
+  await api.post("/api/blogs").send(newBlog).expect(401);
 
   const blogsAfter = await api.get("/api/blogs");
   expect(blogsAfter.body).toHaveLength(blogsInitial.body.length);
