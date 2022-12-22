@@ -1,112 +1,126 @@
-const listHelper = require("../utils/list_helper");
+const mongoose = require("mongoose");
+const supertest = require("supertest");
+const app = require("../index");
 
-test("dummy returns 1", () => {
-  const blogs = [];
+const http = require("http");
+const server = http.createServer(app);
+const api = supertest(server);
+const Blog = require("../models/blog");
+const { before } = require("lodash");
 
-  const result = listHelper.dummy(blogs);
-  expect(result).toBe(1);
+test("return all blogs as json after logging in", async () => {
+  await api
+    .get("/api/blogs")
+    .expect(200)
+    .expect("Content-Type", /application\/json/);
+}, 1000000);
+
+test("verify unique identifier property is defined as id", async () => {
+  const blogs = await api.get("/api/blogs");
+  expect(blogs.body[0].id).toBeDefined();
 });
 
-describe("total likes", () => {
-  const listWithOneBlog = [
-    {
-      _id: "5a422aa71b54a676234d17f8",
-      title: "Go To Statement Considered Harmful",
-      author: "Edsger W. Dijkstra",
-      url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-      likes: 5,
-      __v: 0,
-    },
-  ];
+let authorization;
 
-  const listWithMultipleBlogs = [
-    {
-      _id: "5a422a851b54a676234d17f7",
-      title: "React patterns",
-      author: "Michael Chan",
-      url: "https://reactpatterns.com/",
-      likes: 7,
-      __v: 0,
-    },
-    {
-      _id: "5a422aa71b54a676234d17f8",
-      title: "Go To Statement Considered Harmful",
-      author: "Edsger W. Dijkstra",
-      url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-      likes: 5,
-      __v: 0,
-    },
-    {
-      _id: "5a422b3a1b54a676234d17f9",
-      title: "Canonical string reduction",
-      author: "Edsger W. Dijkstra",
-      url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-      likes: 12,
-      __v: 0,
-    },
-    {
-      _id: "5a422b891b54a676234d17fa",
-      title: "First class tests",
-      author: "Robert C. Martin",
-      url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
-      likes: 10,
-      __v: 0,
-    },
-    {
-      _id: "5a422ba71b54a676234d17fb",
-      title: "TDD harms architecture",
-      author: "Robert C. Martin",
-      url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
-      likes: 0,
-      __v: 0,
-    },
-    {
-      _id: "5a422bc61b54a676234d17fc",
-      title: "Type wars",
-      author: "Robert C. Martin",
-      url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
-      likes: 2,
-      __v: 0,
-    },
-  ];
+beforeEach(async () => {
+  const userCarl = {
+    username: "carl",
+    password: "carl",
+  };
 
-  test("of empty list is zero", () => {
-    const result = listHelper.totalLikes([]);
-    expect(result).toBe(0);
-  });
+  const loginResponse = await api.post("/api/login").send(userCarl);
 
-  test("when list has only one log, equals the likes of that", () => {
-    const result = listHelper.totalLikes(listWithOneBlog);
-    expect(result).toBe(5);
-  });
+  authorization = { Authorization: `bearer ${loginResponse.body.token}` };
+});
 
-  test("of a bigger list is calculated right", () => {
-    const result = listHelper.totalLikes(listWithMultipleBlogs);
-    expect(result).toBe(36);
-  });
+test("verify POST request creates new blog post after login and likes default to 0 if missing", async () => {
+  const blogsInitial = await api.get("/api/blogs");
 
-  test("favorite blog, first blog with max like if multiple of equal likes", () => {
-    const result = listHelper.favoriteBlog(listWithMultipleBlogs);
-    expect(result).toEqual({
-      title: "Canonical string reduction",
-      author: "Edsger W. Dijkstra",
-      likes: 12,
-    });
-  });
+  const newBlog = {
+    title: "New Blog from Tests",
+    url: "some url",
+  };
 
-  test("author with most blogs", () => {
-    const result = listHelper.mostBlogs(listWithMultipleBlogs);
-    expect(result).toEqual({
-      author: "Robert C. Martin",
-      blogs: 3,
-    });
-  });
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .set(authorization)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
 
-  test("author with most likes", () => {
-    const result = listHelper.mostLikes(listWithMultipleBlogs);
-    expect(result).toEqual({
-      author: "Edsger W. Dijkstra",
-      likes: 17,
-    });
-  });
+  const blogsAfter = await api.get("/api/blogs");
+  expect(blogsAfter.body).toHaveLength(blogsInitial.body.length + 1);
+
+  expect(blogsAfter.body[blogsAfter.body.length - 1].likes).toBe(0);
+});
+
+test("if title or url is missing from request with authorization, return 400 Bad Request", async () => {
+  const blogsInitial = await api.get("/api/blogs");
+
+  const newBlog = {
+    title: "Some blog",
+    author: "Carl",
+  };
+
+  await api.post("/api/blogs").send(newBlog).set(authorization).expect(400);
+
+  const response = await api.get("/api/blogs");
+  expect(response.body).toHaveLength(blogsInitial.body.length);
+});
+
+test("deleting existing blog from list returns 204 if deleted by user", async () => {
+  const blogsInitial = await api.get("/api/blogs");
+  const blogToDelete = blogsInitial.body[blogsInitial.body.length - 1];
+
+  await api
+    .delete(`/api/blogs/${blogToDelete.id}`)
+    .set(authorization)
+    .expect(204);
+
+  const updatedBlogs = await api.get("/api/blogs");
+  expect(updatedBlogs.body).toHaveLength(blogsInitial.body.length - 1);
+});
+
+test("updating existing blog likes from list return updated blogs likes + 1", async () => {
+  const blogsInitial = await api.get("/api/blogs");
+  const blogToUpdate = blogsInitial.body[blogsInitial.body.length - 1];
+  const updatedBlog = {
+    ...blogToUpdate,
+    likes: blogToUpdate.likes + 1,
+  };
+
+  await api
+    .put(`/api/blogs/${blogToUpdate.id}`, updatedBlog)
+    .send(updatedBlog)
+    .expect(200);
+
+  const updatedBlogsList = await api.get("/api/blogs");
+  expect(updatedBlogsList.body[blogsInitial.body.length - 1].likes).toBe(
+    blogsInitial.body[blogsInitial.body.length - 1].likes + 1
+  );
+
+  expect(updatedBlogsList.body[blogsInitial.body.length - 1]).toEqual(
+    updatedBlog
+  );
+});
+
+test("Return 401 Unauthorized if token is not provided when POST request is made", async () => {
+  const blogsInitial = await api.get("/api/blogs");
+
+  const newBlog = {
+    title: "Unauthorized blog",
+    url: "some url",
+  };
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(401)
+
+  const blogsAfter = await api.get("/api/blogs");
+  expect(blogsAfter.body).toHaveLength(blogsInitial.body.length);
+});
+
+afterAll(() => {
+  mongoose.connection.close();
 });

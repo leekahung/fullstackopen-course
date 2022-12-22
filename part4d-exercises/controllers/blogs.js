@@ -1,8 +1,5 @@
-const jwt = require("jsonwebtoken");
 const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
-const User = require("../models/user");
-const config = require("../utils/config");
 const { userExtractor } = require("../utils/middleware");
 
 blogsRouter.get("/", async (_request, response) => {
@@ -38,6 +35,16 @@ blogsRouter.post("/", userExtractor, async (request, response) => {
   await user.save();
 
   response.status(201).json(savedBlog);
+});
+
+blogsRouter.put("/:id", async (request, response) => {
+  const blogToUpdate = await Blog.findByIdAndUpdate(
+    request.body.id,
+    { likes: request.body.likes },
+    { new: true }
+  );
+
+  response.json(blogToUpdate);
 });
 
 blogsRouter.delete("/:id", userExtractor, async (request, response) => {

@@ -1,5 +1,4 @@
 const morgan = require("morgan");
-const logger = require("./logger");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 const User = require("../models/user");
@@ -12,16 +11,16 @@ const middlewareLogger = morgan(`
 `);
 
 const errorHandler = (error, _request, response, next) => {
-  logger.error(error.message);
+  console.log(error.message);
 
   if (error.name === "CaseError") {
     return response.status(400).send({ error: "malformatted id" });
   } else if (error.name === "ValidationError") {
     return response.status(400).json({ error: error.message });
   } else if (error.name === "JsonWebTokenError") {
-    return response.status(400).json({ error: "invalid token" });
+    return response.status(401).json({ error: "invalid token" });
   } else if (error.name === "TokenExpiredError") {
-    return response.status(400).json({ error: "token expired" });
+    return response.status(401).json({ error: "token expired" });
   }
 
   next(error);

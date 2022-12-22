@@ -86,6 +86,15 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "carl",
+  "password": "carl"
+}
+
+###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
@@ -97,7 +106,29 @@ Content-Type: application/json
 ###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2EyNTJjNTYzODRhYzc4NmM5OGI3ZWUiLCJpYXQiOjE2NzE2ODA2NjksImV4cCI6MTY3MTY4NDI2OX0.nRAH70h0Dh6coJ0qGD3pixoiycBX-YkW8wyR8eylrAc
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2EyNTJjNTYzODRhYzc4NmM5OGI3ZWUiLCJpYXQiOjE2NzE3MTA3MzIsImV4cCI6MTY3MTcxNDMzMn0.mVPhIxhBs73Jg5THWnV9NkkvuPMbHqBXtAfMcSFQwkU
+
+{
+  "title": "Rock climbing",
+  "likes": 12,
+  "url": "some url"
+}
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhcmwiLCJpZCI6IjYzYTI1MmNlNjM4NGFjNzg2Yzk4YjdmNCIsImlhdCI6MTY3MTcxMDk1NSwiZXhwIjoxNjcxNzE0NTU1fQ.f6FZnL492hJabA4UFM_GpGwbwQcHmYkMsC7BtiDYsRs
+
+{
+  "title": "Book stacking",
+  "likes": 2,
+  "url": "some url"
+}
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2EyNTJjNTYzODRhYzc4NmM5OGI3ZWUiLCJpYXQiOjE2NzE3MTA3MzIsImV4cCI6MTY3MTcxNDMzMn0.mVPhIxhBs73Jg5THWnV9NkkvuPMbHqBXtAfMcSFQwkU
 
 {
   "title": "New blog with authorization token, but without author, likes, and userId property",
@@ -123,9 +154,24 @@ Content-Type: application/json
 }
 
 ###
+DELETE http://localhost:3001/api/blogs/63a3d30a6afa3b58d273ef31
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNjk0MzYzLCJleHAiOjE2NzE2OTc5NjN9.zLUuYhPSo2W6fMsjdcHshAYLTa-rTmEjceEDycsTmMA
+
+###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNjgwNzU0LCJleHAiOjE2NzE2ODQzNTR9.JS1dWtedOCV7SydV0b1mjtCLVQSadESQ-V06MSLH-vU
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNzEwODU2LCJleHAiOjE2NzE3MTQ0NTZ9.nbQXjheuJMHvWFscz82eN3_KiGxIzaUrQ8T11G6qZ_s
+
+{
+  "title": "Mongo Mongo",
+  "likes": 20,
+  "url": "some url"
+}
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNzEwODU2LCJleHAiOjE2NzE3MTQ0NTZ9.nbQXjheuJMHvWFscz82eN3_KiGxIzaUrQ8T11G6qZ_s
 
 {
   "title": "Posting with a different user",
@@ -135,7 +181,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvY
 ###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNjkyMDAxLCJleHAiOjE2NzE2OTU2MDF9.5nr2uXoI_KnvY2WQULqaJynlRRJmAQGeG-OSE-M713s
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNzEwODU2LCJleHAiOjE2NzE3MTQ0NTZ9.nbQXjheuJMHvWFscz82eN3_KiGxIzaUrQ8T11G6qZ_s
 
 {
   "title": "Posting with refactored Token Extractor",
@@ -165,7 +211,7 @@ Content-Type: application/json
 ###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNjkzNjMwLCJleHAiOjE2NzE2OTcyMzB9.yAGgELxbIIRXLD-uUaqFBxtFMJH8pLaCyXg6GYAEXPE
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2EyNTJjNTYzODRhYzc4NmM5OGI3ZWUiLCJpYXQiOjE2NzE3MTA3MzIsImV4cCI6MTY3MTcxNDMzMn0.mVPhIxhBs73Jg5THWnV9NkkvuPMbHqBXtAfMcSFQwkU
 
 {
   "title": "Refactoring with userExtractor",
