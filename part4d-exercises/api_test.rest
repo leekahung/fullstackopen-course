@@ -221,3 +221,17 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZ
 ###
 DELETE http://localhost:3001/api/blogs/63a406b63d6cb042dbfdbd92
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNhMjUyY2M2Mzg0YWM3ODZjOThiN2YxIiwiaWF0IjoxNjcxNjkzNjMwLCJleHAiOjE2NzE2OTcyMzB9.yAGgELxbIIRXLD-uUaqFBxtFMJH8pLaCyXg6GYAEXPE
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2EyNTJjNTYzODRhYzc4NmM5OGI3ZWUiLCJpYXQiOjE2NzE4NDQwNzQsImV4cCI6MTY3MTg0NzY3NH0.msM30noHpT4sAqpyXBapyfeE9wyKW8xt_Dult4oXi3U
+
+{
+  "title": "To be deleted",
+  "url": "some url"
+}
+
+###
+DELETE http://localhost:3001/api/blogs/63a651e6cdca8ba6d9d5bf27
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2EyNTJjNTYzODRhYzc4NmM5OGI3ZWUiLCJpYXQiOjE2NzE4NDQwNzQsImV4cCI6MTY3MTg0NzY3NH0.msM30noHpT4sAqpyXBapyfeE9wyKW8xt_Dult4oXi3U 
