@@ -27,4 +27,6 @@ const ToggableBlog = forwardRef(
   }
 );
 
+ToggableBlog.displayName = "ToggableBlog";
+
 export default ToggableBlog;

@@ -38,4 +38,6 @@ const Toggable = forwardRef(
   }
 );
 
+Toggable.displayName = "Toggable";
+
 export default Toggable;
