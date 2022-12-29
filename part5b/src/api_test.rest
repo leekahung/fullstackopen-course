@@ -1,0 +1,23 @@
+POST http://localhost:8888/api/data
+Content-Type: application/json
+
+{
+  "id": 6,
+  "content": "test",
+  "date": "something",
+  "important": true
+}
+
+###
+GET http://localhost:8888/api/data
+
+###
+PUT http://localhost:8888/api/data/63946077b2c77e16eba069e1
+Content-Type: application/json
+
+{
+  "content": "HTML is Easy",
+  "date": "2022-12-10T10:33:27.266Z",
+  "important": true,
+  "id": "63946077b2c77e16eba069e1"
+}
