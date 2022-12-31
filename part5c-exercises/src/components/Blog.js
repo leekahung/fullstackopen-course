@@ -22,6 +22,8 @@ const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
     padding: "10px",
   };
 
+  console.log(blog);
+
   return (
     <div style={blogStyles}>
       {blog.title} {blog.author}{" "}
@@ -31,7 +33,7 @@ const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
           <br />
           likes {blog.likes} <button onClick={runLikeBlog} className="likeBtn">like</button>
           <br />
-          {blog.user}
+          {blog.user[0].name}
           <br />
           <button onClick={runDeleteBlog}>remove</button>
         </div>
