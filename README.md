@@ -1,6 +1,6 @@
 # Full Stack Open course
 
-Personal repo for FullStackOpen's Full Stack course/tutorial for React, Redux, Node.js, MongoDB, GraphQL and TypeScript.
+Personal repo for FullStackOpen's Full Stack course for React, Redux, Node.js, MongoDB, GraphQL and TypeScript.
 
 [Link to course content](https://fullstackopen.com/en/#course-contents)
 
