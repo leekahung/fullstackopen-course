@@ -1,4 +1,5 @@
-# Full Stack Open course/tutorial
+# Full Stack Open course
+
 Personal repo for FullStackOpen's Full Stack course/tutorial for React, Redux, Node.js, MongoDB, GraphQL and TypeScript.
 
 [Link to course content](https://fullstackopen.com/en/#course-contents)
@@ -26,7 +27,7 @@ Personal repo for FullStackOpen's Full Stack course/tutorial for React, Redux, N
 
 - - - -
 
-## Full-stack Apps from Course
+## Full-stack Projects from Course
 
 - Note App: [Live site](https://khl-note-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-note-app)
 - Phonebook App: [Live site](https://khl-phonebook-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-phonebook-app)
