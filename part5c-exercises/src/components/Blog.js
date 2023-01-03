@@ -31,9 +31,14 @@ const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
         <div className="blog-info">
           {blog.url}
           <br />
-          likes {blog.likes} <button onClick={runLikeBlog} className="likeBtn">like</button>
+          likes {blog.likes}{" "}
+          <button onClick={runLikeBlog} className="likeBtn">
+            like
+          </button>
           <br />
-          {blog.user[0].name}
+          {blog.user[0].name
+            ? blog.user[0].name
+            : JSON.parse(window.localStorage.getItem("loggedUser")).name}
           <br />
           <button onClick={runDeleteBlog}>remove</button>
         </div>
