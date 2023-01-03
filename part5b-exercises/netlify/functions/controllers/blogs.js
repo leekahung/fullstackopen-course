@@ -3,7 +3,10 @@ const Blog = require("../models/blog");
 const { userExtractor } = require("../utils/middleware");
 
 blogsRouter.get("/", async (_request, response) => {
-  const blogs = await Blog.find({});
+  const blogs = await Blog.find({}).populate("user", {
+    username: 1,
+    name: 1,
+  });
   response.json(blogs);
 });
 
@@ -22,16 +25,24 @@ blogsRouter.post("/", userExtractor, async (request, response) => {
 });
 
 blogsRouter.put("/:id", async (request, response) => {
+  const { user, ...bodyToUpdate } = request.body;
+
   const updateBlogLikes = await Blog.findByIdAndUpdate(
     request.params.id,
-    request.body,
+    bodyToUpdate,
     { new: true }
   );
   response.json(updateBlogLikes);
 });
 
-blogsRouter.delete("/:id", async (request, response) => {
+blogsRouter.delete("/:id", userExtractor, async (request, response) => {
+  const user = request.user;
   await Blog.findByIdAndDelete(request.params.id);
+  user.blogs = user.blogs.filter(
+    (blogId) => blogId.toString() !== request.params.id
+  );
+  await user.save();
+
   response.status(204).end();
 });
 
