@@ -1,11 +1,11 @@
-import AncedoteForm from "./components/AncedoteForm";
-import Ancedotes from "./components/Ancedotes";
+import AnecdoteForm from "./components/AnecdoteForm";
+import Anecdotes from "./components/Anecdotes";
 
 const App = () => {
   return (
     <div className="App">
-      <Ancedotes />
-      <AncedoteForm />
+      <Anecdotes />
+      <AnecdoteForm />
     </div>
   );
 };

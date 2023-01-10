@@ -1,47 +1,47 @@
 import { useSelector, useDispatch } from "react-redux";
-import { upvoteAncedote } from "../reducers/ancedoteReducer";
+import { upvoteAnecdote } from "../reducers/anecdoteReducer";
 import { notifcationChange } from "../reducers/notificationReducer";
 import Notification from "./Notification";
 import Filter from "./Filter";
 
-const Ancedote = ({ ancedote, handleUpvote }) => {
+const Anecdote = ({ anecdote, handleUpvote }) => {
   return (
     <div>
-      {ancedote.content}
+      {anecdote.content}
       <br />
-      has {ancedote.votes} <button onClick={handleUpvote}>vote</button>
+      has {anecdote.votes} <button onClick={handleUpvote}>vote</button>
     </div>
   );
 };
 
-const Ancedotes = () => {
-  const ancedotes = useSelector((state) => {
-    const allAncedotes = state.ancedotes.slice();
-    const sortedAncedotes = allAncedotes.sort(function (a, b) {
+const Anecdotes = () => {
+  const anecdotes = useSelector((state) => {
+    const allAnecdotes = state.anecdotes.slice();
+    const sortedAnecdotes = allAnecdotes.sort(function (a, b) {
       return b.votes - a.votes;
     });
     if (state.filters !== "") {
-      return sortedAncedotes.filter((a) =>
+      return sortedAnecdotes.filter((a) =>
         a.content.toLowerCase().includes(state.filters)
       );
     }
-    return sortedAncedotes;
+    return sortedAnecdotes;
   });
   const dispatch = useDispatch();
 
   return (
     <div>
-      <h1>Ancedotes</h1>
+      <h1>Anecdotes</h1>
       <Notification />
       <Filter />
       <div>
-        {ancedotes.map((a) => {
+        {anecdotes.map((a) => {
           return (
-            <Ancedote
+            <Anecdote
               key={a.id}
-              ancedote={a}
+              anecdote={a}
               handleUpvote={() => {
-                dispatch(upvoteAncedote(a.id));
+                dispatch(upvoteAnecdote(a.id));
                 dispatch(notifcationChange(`You voted "${a.content}"`));
                 setTimeout(() => {
                   dispatch(notifcationChange(""));
@@ -55,4 +55,4 @@ const Ancedotes = () => {
   );
 };
 
-export default Ancedotes;
+export default Anecdotes;
