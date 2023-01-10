@@ -1,18 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
-import { addVote } from "../reducers/ancedoteReducer";
+import { addVote } from "../reducers/anecdoteReducer";
 
-const Ancedote = ({ ancedote, handleAddVote }) => {
+const Anecdote = ({ anecdote, handleAddVote }) => {
   return (
     <div>
-      {ancedote.content}
+      {anecdote.content}
       <br />
-      has {ancedote.vote} <button onClick={handleAddVote}>vote</button>
+      has {anecdote.vote} <button onClick={handleAddVote}>vote</button>
     </div>
   );
 };
 
-const AncedoteList = () => {
-  const ancedotes = useSelector((state) => state).sort((a, b) => {
+const AnecdoteList = () => {
+  const anecdotes = useSelector((state) => state).sort((a, b) => {
     return b.vote - a.vote;
   });
   const dispatch = useDispatch();
@@ -23,11 +23,11 @@ const AncedoteList = () => {
 
   return (
     <div>
-      {ancedotes.map((a) => {
+      {anecdotes.map((a) => {
         return (
-          <Ancedote
+          <Anecdote
             key={a.id}
-            ancedote={a}
+            anecdote={a}
             handleAddVote={() => handleAddVote(a.id)}
           />
         );
@@ -36,4 +36,4 @@ const AncedoteList = () => {
   );
 };
 
-export default AncedoteList;
+export default AnecdoteList;

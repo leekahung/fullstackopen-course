@@ -2,7 +2,7 @@ const generateId = () => {
   return Number((Math.random() * 1000000).toFixed(0));
 };
 
-const initialAncedotes = [
+const initialAnecdotes = [
   "If it hurts, do it more often",
   "Adding manpower to a late software project makes it later!",
   "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
@@ -11,7 +11,7 @@ const initialAncedotes = [
   "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
 ];
 
-const initialState = initialAncedotes.map((a) => {
+const initialState = initialAnecdotes.map((a) => {
   return {
     content: a,
     vote: 0,
@@ -19,27 +19,27 @@ const initialState = initialAncedotes.map((a) => {
   };
 });
 
-const ancedoteReducer = (state = initialState, action) => {
+const anecdoteReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "NEW_ANCEDOTE":
+    case "NEW_Anecdote":
       const content = action.data.content;
       return [...state, { content, vote: 0, id: generateId() }];
     case "VOTE":
       const id = action.data.id;
-      const ancedoteToUpdate = state.find((a) => a.id === id);
-      const updatedAncedote = {
-        ...ancedoteToUpdate,
-        vote: ancedoteToUpdate.vote + 1,
+      const anecdoteToUpdate = state.find((a) => a.id === id);
+      const updatedAnecdote = {
+        ...anecdoteToUpdate,
+        vote: anecdoteToUpdate.vote + 1,
       };
-      return state.map((a) => (a.id === id ? updatedAncedote : a));
+      return state.map((a) => (a.id === id ? updatedAnecdote : a));
     default:
       return state;
   }
 };
 
-export const addAncedote = (content) => {
+export const addAnecdote = (content) => {
   return {
-    type: "NEW_ANCEDOTE",
+    type: "NEW_Anecdote",
     data: {
       content,
       vote: 0,
@@ -55,4 +55,4 @@ export const addVote = (id) => {
   };
 };
 
-export default ancedoteReducer;
+export default anecdoteReducer;
