@@ -11,24 +11,19 @@
       "id": 2
     },
     {
-      "content": "new note",
+      "content": "add note",
       "important": false,
       "id": 3
     },
     {
-      "content": "another note",
+      "content": "new note",
       "important": false,
       "id": 4
     },
     {
-      "content": "new note",
+      "content": "add all these notes",
       "important": false,
       "id": 5
-    },
-    {
-      "content": "this note",
-      "important": false,
-      "id": 6
     }
   ]
 }

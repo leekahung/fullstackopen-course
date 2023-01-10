@@ -18,6 +18,7 @@ const Notes = () => {
       ? state.notes.filter((n) => n.important)
       : state.notes.filter((n) => !n.important);
   });
+
   const dispatch = useDispatch();
 
   const toggleImportant = (id) => {
