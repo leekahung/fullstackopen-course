@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { upvoteAnecdote } from "../reducers/anecdoteReducer";
-import { setNotification } from "../reducers/notificationReducer";
+import { updateAnecdote } from "../reducers/anecdoteReducer";
+import { runNotification } from "../reducers/notificationReducer";
 
 import Notification from "./Notification";
 import Filter from "./Filter";
@@ -21,6 +21,7 @@ const Anecdotes = () => {
     const sortedAnecdotes = allAncedotes.sort(function (a, b) {
       return b.votes - a.votes;
     });
+
     if (state.filters !== "") {
       return sortedAnecdotes.filter((a) =>
         a.content.toLowerCase().includes(state.filters)
@@ -30,12 +31,9 @@ const Anecdotes = () => {
   });
   const dispatch = useDispatch();
 
-  const handleUpvote = (id, content) => {
-    dispatch(upvoteAnecdote(id));
-    dispatch(setNotification(content));
-    setTimeout(() => {
-      dispatch(setNotification(""));
-    }, 4000);
+  const handleUpvote = async (anecdote) => {
+    dispatch(updateAnecdote(anecdote));
+    dispatch(runNotification(`You voted for "${anecdote.content}"`, 4000));
   };
 
   return (
@@ -49,7 +47,7 @@ const Anecdotes = () => {
             <Anecdote
               key={a.id}
               anecdote={a}
-              handleUpvote={() => handleUpvote(a.id, a.content)}
+              handleUpvote={() => handleUpvote(a)}
             />
           );
         })}

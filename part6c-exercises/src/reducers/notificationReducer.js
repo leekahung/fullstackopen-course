@@ -14,4 +14,13 @@ export const setNotification = (notification) => {
   };
 };
 
+export const runNotification = (message, time) => {
+  return async (dispatch) => {
+    dispatch(setNotification(message));
+    setTimeout(() => {
+      dispatch(setNotification(""));
+    }, time);
+  };
+};
+
 export default notificationReducer;
