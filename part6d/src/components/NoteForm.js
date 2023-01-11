@@ -1,13 +1,12 @@
-import { useDispatch } from "react-redux";
-import { createNotes } from "../reducers/noteReducer";
+import { connect } from "react-redux";
+import { createNote } from "../reducers/noteReducer";
 
-const NoteForm = () => {
-  const dispatch = useDispatch();
+const NoteForm = (props) => {
   const handleNewNote = (event) => {
     event.preventDefault();
     const content = event.target.note.value;
     event.target.note.value = "";
-    dispatch(createNotes(content));
+    props.createNote(content);
   };
 
   return (
@@ -18,4 +17,14 @@ const NoteForm = () => {
   );
 };
 
-export default NoteForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createNote: (value) => {
+      dispatch(createNote(value));
+    },
+  };
+};
+
+const ConnectedNoteForm = connect(null, mapDispatchToProps)(NoteForm);
+
+export default ConnectedNoteForm;

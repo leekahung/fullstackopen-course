@@ -28,14 +28,14 @@ export const initializeNotes = () => {
   };
 };
 
-export const createNotes = (content) => {
+export const createNote = (content) => {
   return async (dispatch) => {
     const newNote = await noteService.createNew(content);
     dispatch(addNotes(newNote));
   };
 };
 
-export const updateNotes = (note) => {
+export const updateNote = (note) => {
   return async (dispatch) => {
     const updatedNote = await noteService.updateObject(note);
     dispatch(toggleImportance(updatedNote));

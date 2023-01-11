@@ -14,6 +14,11 @@
       "content": "new note",
       "important": true,
       "id": 3
+    },
+    {
+      "content": "another note",
+      "important": false,
+      "id": 4
     }
   ]
 }
