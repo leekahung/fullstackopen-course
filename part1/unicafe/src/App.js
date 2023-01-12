@@ -12,12 +12,19 @@ const Feedback = ({ handleFeedback }) => {
 };
 
 const Statistics = ({ good, neutral, bad }) => {
+  const all = good + neutral + bad;
+  const average = (good - bad) / all;
+  const positive = good / all;
+
   return (
     <div>
       <h1>statistics</h1>
       <div>good {good}</div>
       <div>neutral {neutral}</div>
       <div>bad {bad}</div>
+      <div>all {all}</div>
+      <div>average {average ? average : 0}</div>
+      <div>positive {positive ? positive : 0} %</div>
     </div>
   );
 };
