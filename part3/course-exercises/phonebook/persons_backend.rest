@@ -10,7 +10,7 @@ Content-Type: application/json
 GET http://localhost:3001/api/persons
 
 ###
-DELETE http://localhost:3001/api/persons/974783
+DELETE http://localhost:3001/api/persons/320054
 
 ###
 GET http://localhost:3001/api/persons
