@@ -47,6 +47,21 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
+const generateId = () => {
+  return Number((Math.random() * 1000000).toFixed(0));
+};
+
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+  const newPerson = {
+    ...body,
+    id: generateId(),
+  };
+
+  persons = persons.concat(newPerson);
+  response.json(persons);
+});
+
 app.get("/info", (_request, response) => {
   response.send(`
     <div>Phonebook has info for ${persons.length} people</div>
