@@ -1,4 +1,3 @@
-// Exercise 2.6
 import { useState } from "react";
 
 const App = () => {
@@ -7,11 +6,15 @@ const App = () => {
 
   const handleNewPerson = (event) => {
     event.preventDefault();
-    const newPerson = {
-      name: newName,
-    };
-    setNewName("");
-    setPersons(persons.concat(newPerson));
+    if (persons.map((p) => p.name).includes(newName)) {
+      window.alert(`${newName} is already added to phonebook`);
+    } else {
+      const newPerson = {
+        name: newName,
+      };
+      setNewName("");
+      setPersons(persons.concat(newPerson));
+    }
   };
 
   const handleNewName = (event) => {
