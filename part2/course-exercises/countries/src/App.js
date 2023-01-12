@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Country from "./components/Country";
+import ListedCountry from "./components/ListedCountry";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -48,10 +49,11 @@ const App = () => {
         ) : countriesFiltered.length > 1 ? (
           countriesFiltered.map((c) => {
             return (
-              <div key={c.cca3}>
-                {c.name.common}{" "}
-                <button onClick={() => handleShowCountry(c.cca3)}>show</button>
-              </div>
+              <ListedCountry
+                key={c.cca3}
+                country={c}
+                handleShowCountry={handleShowCountry}
+              />
             );
           })
         ) : showCountry ? (
