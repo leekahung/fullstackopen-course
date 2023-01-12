@@ -3,7 +3,10 @@ const app = express();
 app.use(express.json());
 
 const morgan = require("morgan");
-const middlewareLogger = morgan("tiny");
+morgan.token("body", (request) => JSON.stringify(request.body));
+const middlewareLogger = morgan(
+  ":method :url :status :res[content-length] - :response-time ms :body"
+);
 app.use(middlewareLogger);
 
 let persons = [
