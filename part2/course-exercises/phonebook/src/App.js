@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import Notification from "./components/Notification";
 import numberService from "./services/persons";
 
 const App = () => {
@@ -9,6 +10,12 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [query, setQuery] = useState("");
+
+  const initialNotification = {
+    message: "",
+    type: "",
+  };
+  const [notification, setNotification] = useState(initialNotification);
 
   useEffect(() => {
     numberService.getAll().then((initialPeople) => {
@@ -35,6 +42,8 @@ const App = () => {
           );
           setNewName("");
           setNewNumber("");
+          setNotification(``);
+          runNotification(`Updated ${newName}'s number`, "message", 3000);
         });
       }
     } else {
@@ -46,6 +55,7 @@ const App = () => {
         setNewName("");
         setNewNumber("");
         setPersons(persons.concat(addedPerson));
+        runNotification(`Added ${newName}`, "message", 3000);
       });
     }
   };
@@ -62,10 +72,22 @@ const App = () => {
     setQuery(event.target.value);
   };
 
+  const runNotification = (message, type, time) => {
+    const notificationObject = {
+      message,
+      type,
+    };
+    setNotification(notificationObject);
+    setTimeout(() => {
+      setNotification(initialNotification);
+    }, time);
+  };
+
   const handleDeletePerson = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
       numberService.removeCurrent(person.id);
       setPersons(persons.filter((p) => p.id !== person.id));
+      runNotification(`Deleted ${person.name} from phonebook`, "message", 3000);
     }
   };
 
@@ -79,6 +101,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification notification={notification} />
       <Filter query={query} handleQuery={handleQuery} />
       <h2>add a new</h2>
       <PersonForm
