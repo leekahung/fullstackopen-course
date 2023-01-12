@@ -85,7 +85,13 @@ const App = () => {
 
   const handleDeletePerson = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
-      numberService.removeCurrent(person.id);
+      numberService.removeCurrent(person.id).catch((_error) => {
+        runNotification(
+          `Information of ${person.name} has already been removed from server`,
+          "error",
+          3000
+        );
+      });
       setPersons(persons.filter((p) => p.id !== person.id));
       runNotification(`Deleted ${person.name} from phonebook`, "message", 3000);
     }

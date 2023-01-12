@@ -13,7 +13,8 @@ const createNew = (personObject) => {
 };
 
 const removeCurrent = (id) => {
-  axios.delete(`${baseUrl}/${id}`);
+  const request = axios.delete(`${baseUrl}/${id}`);
+  return request.then((response) => response.data);
 };
 
 const updateObject = (personObject) => {
