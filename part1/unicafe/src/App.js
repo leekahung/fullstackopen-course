@@ -12,14 +12,14 @@ const Feedback = ({ handleFeedback }) => {
 };
 
 const StatisticLine = ({ text, value }) => {
-  return text === "positive" ? (
-    <div>
-      {text} {value} %
-    </div>
-  ) : (
-    <div>
-      {text} {value}
-    </div>
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>
+        {text === "positive" ? value * 100 : value}{" "}
+        {text === "positive" ? "%" : ""}
+      </td>
+    </tr>
   );
 };
 
@@ -32,14 +32,16 @@ const Statistics = ({ good, neutral, bad }) => {
     <div>
       <h1>statistics</h1>
       {all > 0 ? (
-        <>
-          <StatisticLine text="good" value={good} />
-          <StatisticLine text="neutral" value={neutral} />
-          <StatisticLine text="bad" value={bad} />
-          <StatisticLine text="all" value={all} />
-          <StatisticLine text="average" value={average ? average : 0} />
-          <StatisticLine text="positive" value={positive ? positive : 0} />
-        </>
+        <table>
+          <tbody>
+            <StatisticLine text="good" value={good} />
+            <StatisticLine text="neutral" value={neutral} />
+            <StatisticLine text="bad" value={bad} />
+            <StatisticLine text="all" value={all} />
+            <StatisticLine text="average" value={average ? average : 0} />
+            <StatisticLine text="positive" value={positive ? positive : 0} />
+          </tbody>
+        </table>
       ) : (
         <div>No feedback given</div>
       )}
