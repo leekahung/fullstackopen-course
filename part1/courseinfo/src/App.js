@@ -2,16 +2,20 @@ const Header = ({ course }) => {
   return <h1>{course}</h1>;
 };
 
+const Part = ({ part, exercises }) => {
+  return (
+    <p>
+      {part} {exercises}
+    </p>
+  );
+};
+
 const Content = ({ content }) => {
   return (
     <>
-      {content.map((c) => {
-        return (
-          <p>
-            {c.part} {c.exercises}
-          </p>
-        );
-      })}
+      <Part part={content[0].part} exercises={content[0].exercises} />
+      <Part part={content[1].part} exercises={content[1].exercises} />
+      <Part part={content[2].part} exercises={content[2].exercises} />
     </>
   );
 };
