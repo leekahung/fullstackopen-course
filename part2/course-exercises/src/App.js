@@ -11,6 +11,7 @@ const Part = ({ name, exercises }) => {
 };
 
 const Total = ({ parts }) => {
+  // Exercise 2.3
   const total = parts
     .map((p) => p.exercises)
     .reduce((total, curr) => total + curr, 0);
