@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-import axios from "axios";
+import numberService from "./services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [query, setQuery] = useState("");
-  const baseUrl = "http://localhost:3001/persons";
 
   useEffect(() => {
-    axios.get(baseUrl).then((response) => {
-      setPersons(response.data);
+    numberService.getAll().then((initialPeople) => {
+      setPersons(initialPeople);
     });
   }, []);
 
@@ -26,9 +25,11 @@ const App = () => {
         name: newName,
         number: newNumber,
       };
-      setNewName("");
-      setNewNumber("");
-      setPersons(persons.concat(newPerson));
+      numberService.createNew(newPerson).then((addedPerson) => {
+        setNewName("");
+        setNewNumber("");
+        setPersons(persons.concat(addedPerson));
+      });
     }
   };
 
