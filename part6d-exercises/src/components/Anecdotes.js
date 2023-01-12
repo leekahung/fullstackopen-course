@@ -32,7 +32,7 @@ const Anecdotes = () => {
 
   const handleUpvote = (anecdote) => {
     dispatch(upvoteAnecdote(anecdote));
-    dispatch(runNotification(`You voted for "${anecdote.content}"`, 4000));
+    dispatch(runNotification(`You voted for "${anecdote.content}"`, 5000));
   };
 
   return (

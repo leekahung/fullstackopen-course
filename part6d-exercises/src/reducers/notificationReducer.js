@@ -12,11 +12,9 @@ const notificationSlice = createSlice({
     setNotification(state, action) {
       if (state.timeoutID !== "") {
         clearTimeout(state.timeoutID);
-        state.message = action.payload.message;
-        state.timeoutID = action.payload.timeoutID;
-      } else {
-        return action.payload;
       }
+      state.message = action.payload.message;
+      state.timeoutID = action.payload.timeoutID;
     },
     clearNotification(_state, _action) {
       return initialState;
