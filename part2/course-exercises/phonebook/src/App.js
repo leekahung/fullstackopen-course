@@ -1,3 +1,4 @@
+// Exercise 2.6
 import { useState } from "react";
 
 const App = () => {
