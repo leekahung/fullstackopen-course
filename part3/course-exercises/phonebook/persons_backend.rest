@@ -10,7 +10,25 @@ Content-Type: application/json
 GET http://localhost:3001/api/persons
 
 ###
-DELETE http://localhost:3001/api/persons/7728687730215624
+DELETE http://localhost:3001/api/persons/974783
 
 ###
 GET http://localhost:3001/api/persons
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "",
+  "number": "39-03-2040829"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Lila Neuman",
+  "number": ""
+}
