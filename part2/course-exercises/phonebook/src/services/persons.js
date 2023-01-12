@@ -1,4 +1,3 @@
-// Exercise 2.16
 import axios from "axios";
 
 const baseUrl = "http://localhost:3001/persons";
@@ -13,6 +12,10 @@ const createNew = (personObject) => {
   return request.then((response) => response.data);
 };
 
-const numberService = { getAll, createNew };
+const removeCurrent = (id) => {
+  axios.delete(`${baseUrl}/${id}`);
+};
+
+const numberService = { getAll, createNew, removeCurrent };
 
 export default numberService;

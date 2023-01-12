@@ -45,6 +45,13 @@ const App = () => {
     setQuery(event.target.value);
   };
 
+  const handleDeletePerson = (person) => {
+    if (window.confirm(`Delete ${person.name}?`)) {
+      numberService.removeCurrent(person.id);
+      setPersons(persons.filter((p) => p.id !== person.id));
+    }
+  };
+
   const personsFiltered =
     query !== ""
       ? persons.filter((p) =>
@@ -65,7 +72,10 @@ const App = () => {
         handleNewNumber={handleNewNumber}
       />
       <h2>Numbers</h2>
-      <Persons persons={personsFiltered} />
+      <Persons
+        persons={personsFiltered}
+        handleDeletePerson={handleDeletePerson}
+      />
     </div>
   );
 };
