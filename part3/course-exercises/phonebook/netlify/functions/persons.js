@@ -1,5 +1,7 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const morgan = require("morgan");
@@ -50,8 +52,15 @@ app.get("/api/persons/:id", (request, response) => {
 
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
-  persons = persons.filter((p) => p.id !== id);
-  response.status(204).end();
+  const personToDelete = persons.find((p) => p.id === id);
+  if (personToDelete) {
+    persons = persons.filter((p) => p.id !== id);
+    response.status(204).end();
+  } else {
+    response.status(404).json({
+      error: "User not found",
+    });
+  }
 });
 
 const generateId = () => {
@@ -80,7 +89,7 @@ app.post("/api/persons", (request, response) => {
   }
 
   persons = persons.concat(newPerson);
-  response.json(persons);
+  response.json(newPerson);
 });
 
 app.get("/info", (_request, response) => {
@@ -91,7 +100,9 @@ app.get("/info", (_request, response) => {
   `);
 });
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const serverless = require("serverless-http");
+const handler = serverless(app);
+module.exports.handler = async (event, context) => {
+  const result = await handler(event, context);
+  return result;
+};
