@@ -62,7 +62,7 @@ app.post("/api/persons", (request, response, next) => {
 });
 
 // Unused in 3-20 which ask to respond with error instead of ask for update
-app.put("/api/persons/:id", (request, response, next) => {
+/* app.put("/api/persons/:id", (request, response, next) => {
   const body = request.body;
 
   const personToUpdate = {
@@ -78,7 +78,7 @@ app.put("/api/persons/:id", (request, response, next) => {
       response.json(updatedPerson);
     })
     .catch((error) => next(error));
-});
+}); */
 
 app.use(errorHandler);
 
