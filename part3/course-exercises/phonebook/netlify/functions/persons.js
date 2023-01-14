@@ -60,6 +60,21 @@ app.post("/api/persons", (request, response, next) => {
     .catch((error) => next(error));
 });
 
+app.put("/api/persons/:id", (request, response, next) => {
+  const body = request.body;
+
+  const personToUpdate = {
+    ...body,
+    number: body.number,
+  };
+
+  Person.findByIdAndUpdate(request.params.id, personToUpdate, { new: true })
+    .then((updatedPerson) => {
+      response.json(updatedPerson);
+    })
+    .catch((error) => next(error));
+});
+
 app.get("/info", (_request, response) => {
   Person.find({}).then((allPersons) => {
     response.send(`
