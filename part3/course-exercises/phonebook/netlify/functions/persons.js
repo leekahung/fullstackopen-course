@@ -75,16 +75,6 @@ app.put("/api/persons/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-app.get("/info", (_request, response) => {
-  Person.find({}).then((allPersons) => {
-    response.send(`
-      <div>Phonebook has info for ${allPersons.length} people</div>
-      <br>
-      <div>${new Date()}</div>
-    `);
-  });
-});
-
 app.use(errorHandler);
 
 const serverless = require("serverless-http");
