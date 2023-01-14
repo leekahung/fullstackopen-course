@@ -16,7 +16,7 @@ const errorHandler = (error, _request, response, next) => {
     });
   } else if (error.name === "ValidationError") {
     return response.status(400).send({
-      error: error.message,
+      error: `Invalid number: ${error.message}`,
     });
   }
 
