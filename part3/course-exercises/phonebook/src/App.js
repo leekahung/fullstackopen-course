@@ -59,11 +59,16 @@ const App = () => {
           });
       }
     } else {
-      numberService.createNew(personInfo).then((newPerson) => {
-        setPersons(persons.concat(newPerson));
-        runNotification(`Added ${newPerson.name} to phonebook`, 5000);
-        setPersonInfo(initialPerson);
-      });
+      numberService
+        .createNew(personInfo)
+        .then((newPerson) => {
+          setPersons(persons.concat(newPerson));
+          runNotification(`Added ${newPerson.name} to phonebook`, 5000);
+          setPersonInfo(initialPerson);
+        })
+        .catch((error) => {
+          runNotification(error.response.data.error, 5000, true);
+        });
     }
   };
 
