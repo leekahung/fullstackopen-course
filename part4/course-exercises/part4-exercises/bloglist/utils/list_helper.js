@@ -12,11 +12,31 @@ const totalLikes = (blogs) => {
 
 const favoriteBlog = (blogs) => {
   const mostLikes = Math.max(...blogs.map((b) => b.likes));
-  const mostLiked = blogs.filter((b) => b.likes === mostLikes);
+  const mostLiked = blogs.find((b) => b.likes === mostLikes);
   return {
-    title: mostLiked[0].title,
-    author: mostLiked[0].author,
-    likes: mostLiked[0].likes,
+    title: mostLiked.title,
+    author: mostLiked.author,
+    likes: mostLiked.likes,
+  };
+};
+
+const mostBlogs = (blogs) => {
+  const groupedByAuthor = blogs.reduce((groupByAuthor, blog) => {
+    if (!groupByAuthor[blog.author]) {
+      groupByAuthor[blog.author] = 0;
+    }
+    groupByAuthor[blog.author] += 1;
+    return groupByAuthor;
+  }, {});
+
+  const mostBlog = Math.max(...Object.values(groupedByAuthor));
+  const mostBlogAuthor = Object.keys(groupedByAuthor).find(
+    (author) => groupedByAuthor[author] === mostBlog
+  );
+
+  return {
+    author: mostBlogAuthor,
+    blogs: mostBlog,
   };
 };
 
@@ -24,4 +44,5 @@ module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
+  mostBlogs,
 };

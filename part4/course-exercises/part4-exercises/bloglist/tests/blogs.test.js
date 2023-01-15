@@ -79,6 +79,30 @@ describe("total likes", () => {
       likes: 2,
       __v: 0,
     },
+    {
+      _id: "5a422aa71b54a676234d17f5",
+      title: "Alice Rock Climbing Technique",
+      author: "Alice",
+      url: "some Url",
+      likes: 10,
+      __v: 0,
+    },
+    {
+      _id: "5a422aa71b54a676234d17f7",
+      title: "Alice decorates house",
+      author: "Alice",
+      url: "some Url",
+      likes: 10,
+      __v: 0,
+    },
+    {
+      _id: "5a422aa71b54a676234d17f1",
+      title: "Alice",
+      author: "Alice",
+      url: "some url",
+      likes: 2,
+      __v: 0,
+    },
   ];
 
   test("when list has only one blog, equals the likes of that", () => {
@@ -110,6 +134,16 @@ describe("total likes", () => {
       title: "Alice Rock Climbing Technique",
       author: "Alice",
       likes: 10,
+    });
+  });
+
+  test("mostBlogs returns author with most blogs", () => {
+    const result = listHelper.mostBlogs(listWithMultipleTopBlogs);
+    console.log(result);
+
+    expect(result).toEqual({
+      author: "Alice",
+      blogs: 4,
     });
   });
 });
