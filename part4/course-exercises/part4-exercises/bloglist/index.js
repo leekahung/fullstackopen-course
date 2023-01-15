@@ -3,38 +3,28 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-require("dotenv").config();
+const blogRouter = require("./controllers/blogs");
+const { middlewareLogger, errorHandler } = require("./utils/middleware");
+const config = require("./utils/config");
 
-const blogSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number,
+const mongoUrl = config.MONGODB_URI;
+mongoose.connect(mongoUrl).then((result) => {
+  if (result) {
+    console.log("Connected to MongoDB");
+  } else {
+    console.log("Connection to MongoDB failed");
+  }
 });
-
-const Blog = mongoose.model("Blog", blogSchema);
-
-const mongoUrl = process.env.MONGODB_URI;
-mongoose.connect(mongoUrl);
 
 app.use(cors());
 app.use(express.json());
+app.use(middlewareLogger);
 
-app.get("/api/blogs", (_request, response) => {
-  Blog.find({}).then((blogs) => {
-    response.json(blogs);
-  });
-});
+app.use("/api/blogs", blogRouter);
 
-app.post("/api/blogs", (request, response) => {
-  const blog = new Blog(request.body);
+app.use(errorHandler);
 
-  blog.save().then((result) => {
-    response.status(201).json(result);
-  });
-});
-
-const PORT = 3003;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const server = http.createServer(app);
+server.listen(config.PORT, () => {
+  console.log(`Server running on port ${config.PORT}`);
 });
