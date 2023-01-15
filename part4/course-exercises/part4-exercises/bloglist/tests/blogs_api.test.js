@@ -29,7 +29,7 @@ test("verify the creation of blog post to server", async () => {
     title: "New blog",
     author: "Alice",
     url: "some url",
-    likes: 0,
+    likes: 3,
   };
 
   await api
@@ -45,9 +45,26 @@ test("verify the creation of blog post to server", async () => {
       title: "New blog",
       author: "Alice",
       url: "some url",
-      likes: 0,
+      likes: 3,
     })
   );
+});
+
+test("verify likes property is 0 by default if likes property is missing", async () => {
+  const blogPost = {
+    title: "New blog",
+    author: "Alice",
+    url: "some url",
+  };
+
+  await api
+    .post("/api/blogs")
+    .send(blogPost)
+    .expect(201)
+    .expect("Content-Type", /application\/json/);
+
+  const response = await api.get("/api/blogs");
+  expect(response.body[response.body.length - 1].likes).toBe(0);
 });
 
 afterAll(() => {
