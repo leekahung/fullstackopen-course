@@ -108,6 +108,16 @@ test("verify 400 Bad Request if trying to delete id that doesn't exist", async (
   await api.delete(`/api/blogs/1234456`).expect(400);
 });
 
+test("verify updated likes on blog post", async () => {
+  const blogsInitial = await api.get("/api/blogs");
+  const blogToUpdate = blogsInitial.body[0];
+
+  await api.put(`/api/blogs/${blogToUpdate.id}`).send(blogToUpdate).expect(200);
+
+  const updatedBlog = await api.get(`/api/blogs/${blogToUpdate.id}`);
+  expect(updatedBlog.body.likes).toBe(8);
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
