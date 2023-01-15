@@ -83,6 +83,31 @@ test("verify if title or url properties are missing, return 400 Bad Request", as
   await api.post("/api/blogs").send(blogPost2).expect(400);
 });
 
+test("verify the deletion of a single blog post", async () => {
+  const blogsInitial = await api.get("/api/blogs");
+  const blogToDelete = blogsInitial.body[0];
+
+  await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204);
+
+  const blogsAfter = await api.get("/api/blogs");
+  expect(blogsAfter.body).toHaveLength(blogsInitial.body.length - 1);
+
+  // second blog expect to be first blog
+  const { title, author, url, likes } = initialBlogs[1];
+  expect(blogsAfter.body[0]).toEqual(
+    expect.objectContaining({
+      title,
+      author,
+      url,
+      likes,
+    })
+  );
+});
+
+test("verify 400 Bad Request if trying to delete id that doesn't exist", async () => {
+  await api.delete(`/api/blogs/1234456`).expect(400);
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
