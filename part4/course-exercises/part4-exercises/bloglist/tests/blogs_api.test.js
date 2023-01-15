@@ -67,6 +67,22 @@ test("verify likes property is 0 by default if likes property is missing", async
   expect(response.body[response.body.length - 1].likes).toBe(0);
 });
 
+test("verify if title or url properties are missing, return 400 Bad Request", async () => {
+  const blogPost1 = {
+    author: "Alice",
+    url: "some url",
+  };
+
+  await api.post("/api/blogs").send(blogPost1).expect(400);
+
+  const blogPost2 = {
+    title: "New Blog Post",
+    author: "Alice",
+  };
+
+  await api.post("/api/blogs").send(blogPost2).expect(400);
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
