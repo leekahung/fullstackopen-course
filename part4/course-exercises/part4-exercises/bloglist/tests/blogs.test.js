@@ -169,7 +169,6 @@ describe("total likes", () => {
 
     test("favoriteBlog returns blog with most likes", () => {
       const result = listHelper.favoriteBlog(listWithMultipleBlogs);
-      console.log(result);
 
       expect(result).toEqual({
         title: "Bob creates house",
@@ -180,7 +179,6 @@ describe("total likes", () => {
 
     test("favoriteBlog returns first blog with most likes if there's multiple top liked blogs", () => {
       const result = listHelper.favoriteBlog(listWithMultipleTopBlogs);
-      console.log(result);
 
       expect(result).toEqual({
         title: "Alice Rock Climbing Technique",
@@ -191,7 +189,6 @@ describe("total likes", () => {
 
     test("mostBlogs returns author with most blogs and the total number of blogs", () => {
       const result = listHelper.mostBlogs(listWithMultipleTopBlogs);
-      console.log(result);
 
       expect(result).toEqual({
         author: "Alice",
@@ -201,7 +198,6 @@ describe("total likes", () => {
 
     test("mostLikes returns author with most likes and total sum of likes", () => {
       const result = listHelper.mostLikes(listWithMultipleTopBlogs);
-      console.log(result);
 
       expect(result).toEqual({
         author: "Alice",
@@ -218,7 +214,6 @@ describe("total likes", () => {
 
     test("favoriteBlog returns blog with most likes", () => {
       const result = listHelper.favoriteBlog(courseList);
-      console.log(result);
 
       expect(result).toEqual({
         title: "Canonical string reduction",
@@ -229,7 +224,6 @@ describe("total likes", () => {
 
     test("mostBlogs returns author with most blogs and the total number of blogs", () => {
       const result = listHelper.mostBlogs(courseList);
-      console.log(result);
 
       expect(result).toEqual({
         author: "Robert C. Martin",
@@ -239,7 +233,6 @@ describe("total likes", () => {
 
     test("mostLikes returns author with most likes and total sum of likes", () => {
       const result = listHelper.mostLikes(courseList);
-      console.log(result);
 
       expect(result).toEqual({
         author: "Edsger W. Dijkstra",

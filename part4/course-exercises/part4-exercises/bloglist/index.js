@@ -1,5 +1,6 @@
 const http = require("http");
 const express = require("express");
+require("express-async-errors");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -28,3 +29,5 @@ const server = http.createServer(app);
 server.listen(config.PORT, () => {
   console.log(`Server running on port ${config.PORT}`);
 });
+
+module.exports = server;
