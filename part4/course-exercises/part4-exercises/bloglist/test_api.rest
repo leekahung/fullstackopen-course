@@ -24,6 +24,15 @@ Content-Type: application/json
 
 {
   "username": "aceui",
+  "password": "wrong"
+}
+
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "aceui",
   "password": "secret"
 }
 
