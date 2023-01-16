@@ -58,6 +58,26 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "bobIsCool",
+  "password": "cool"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNjNGFkYmU1MTNiNDhjOGRhZjI5Njk3IiwiaWF0IjoxNjczODM2ODUxLCJleHAiOjE2NzM4NDA0NTF9.AKUlxt157sVfNTlvHQj3egMwcdZeVH37fxLMxViJ1Uo
+
+{
+  "title": "Bob the token holder becomes user of blog post",
+  "author": "Alice",
+  "url": "Blog url"
+}
+
+###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
