@@ -10,6 +10,7 @@ const {
   middlewareLogger,
   errorHandler,
   tokenExtractor,
+  userExtractor,
 } = require("./utils/middleware");
 const config = require("./utils/config");
 const loginRouter = require("./controllers/login");
@@ -26,9 +27,9 @@ mongoose.connect(mongoUrl).then((result) => {
 app.use(cors());
 app.use(express.json());
 app.use(middlewareLogger);
+app.use(tokenExtractor);
 
 app.use("/api/login", loginRouter);
-app.use(tokenExtractor);
 app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
 
