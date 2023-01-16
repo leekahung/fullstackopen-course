@@ -1,0 +1,171 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "aceui",
+  "name": "Alice Ceui",
+  "password": "secret"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "New Blog",
+  "author": "Alice",
+  "url": "Blog url",
+  "user": "63c4aced513b48c8daf29685"
+}
+
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "aceui",
+  "password": "wrong"
+}
+
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "aceui",
+  "password": "secret"
+}
+
+###
+GET http://localhost:3003/api/users
+
+###
+GET http://localhost:3003/api/blogs
+
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "bobIsCool",
+  "name": "Bob Cool",
+  "password": "cool"
+}
+
+###
+GET http://localhost:3003/api/users
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Bob's new house",
+  "author": "Bob",
+  "url": "Blog url",
+  "user": "63c4adbe513b48c8daf29697"
+}
+
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "bobIsCool",
+  "password": "cool"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNjNGFkYmU1MTNiNDhjOGRhZjI5Njk3IiwiaWF0IjoxNjczODM2ODUxLCJleHAiOjE2NzM4NDA0NTF9.AKUlxt157sVfNTlvHQj3egMwcdZeVH37fxLMxViJ1Uo
+
+{
+  "title": "Bob the token holder becomes user of blog post",
+  "author": "Alice",
+  "url": "Blog url"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNjNGFkYmU1MTNiNDhjOGRhZjI5Njk3IiwiaWF0IjoxNjczODM3OTM5LCJleHAiOjE2NzM4NDE1Mzl9.uqxIKi_ZaTX2wpsiQNeZO5gQLH4IEyoZS36Zm24xlXY
+
+{
+  "title": "Moving tokenExtractor to middleware",
+  "author": "Bob",
+  "url": "Blog url"
+}
+
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Alice cooks food!",
+  "author": "Alice",
+  "url": "Blog url",
+  "user": "63c4aced513b48c8daf29685"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2M0YWNlZDUxM2I0OGM4ZGFmMjk2ODUiLCJpYXQiOjE2NzM4MzYyMDcsImV4cCI6MTY3MzgzOTgwN30.lOr6gZEU3oKpN1Ah2izhCnMG5YPAZ-6C2HHKl-vPMT8
+
+{
+  "title": "Blog with authoriziation",
+  "author": "Alice",
+  "url": "Blog url",
+  "user": "63c4aced513b48c8daf29685" 
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2M0YWNlZDUxM2I0OGM4ZGFmMjk2ODUiLCJpYXQiOjE2NzM4MzkwMTgsImV4cCI6MTY3Mzg0MjYxOH0.TnAii0n4gn5Sj-Vvh-gF7e14XLmHFtOFCYPogV9I9rs
+
+{
+  "title": "Posting blog with userExtractor, woo!",
+  "author": "Alice",
+  "url": "Blog url"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2M0YWNlZDUxM2I0OGM4ZGFmMjk2ODUiLCJpYXQiOjE2NzM4NTczOTMsImV4cCI6MTY3Mzg2MDk5M30.SWyZU28ZmbDNCj5UCc6ymDUpOXIrUhsUDuG8aU16fGc
+
+{
+  "title": "Delete Me!",
+  "author": "Alice",
+  "url": "Blog url"
+}
+
+###
+DELETE http://localhost:3003/api/blogs/63c509822834b947802b6697
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYklzQ29vbCIsImlkIjoiNjNjNGFkYmU1MTNiNDhjOGRhZjI5Njk3IiwiaWF0IjoxNjczODU3NDIyLCJleHAiOjE2NzM4NjEwMjJ9.bS1lrvZWxzZJgp-e6IYzdmbpoL3sunexwR0CIA3Xq6Q
+
+###
+DELETE http://localhost:3003/api/blogs/63c509822834b947802b6697
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFjZXVpIiwiaWQiOiI2M2M0YWNlZDUxM2I0OGM4ZGFmMjk2ODUiLCJpYXQiOjE2NzM4NTczOTMsImV4cCI6MTY3Mzg2MDk5M30.SWyZU28ZmbDNCj5UCc6ymDUpOXIrUhsUDuG8aU16fGc
+
+###
+PUT http://localhost:3003/api/blogs/63c4ad68513b48c8daf2968b
+Content-Type: application/json
+
+{
+  "likes": 2
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Blog with without authorization",
+  "author": "Alice",
+  "url": "Blog url",
+  "user": "63c4aced513b48c8daf29685" 
+}
