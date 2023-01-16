@@ -1,25 +1,51 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "username": "aceui",
+  "name": "Alice Ceui",
+  "password": "secret"
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "New Blog",
+  "author": "Alice",
+  "url": "Blog url",
+  "user": "63c4aced513b48c8daf29685"
+}
+
+###
+GET http://localhost:3003/api/users
+
+###
 GET http://localhost:3003/api/blogs
 
 ###
-POST http://localhost:3003/api/blogs
+POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-  "title": "Some Blog",
-  "author": "Alice",
-  "url": "some url",
-  "likes": 2
+  "username": "bobIsCool",
+  "name": "Bob Cool",
+  "password": "cool"
 }
+
+###
+GET http://localhost:3003/api/users
 
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Epic blog",
+  "title": "Bob's new house",
   "author": "Bob",
-  "url": "epic url",
-  "likes": 5
+  "url": "Blog url",
+  "user": "63c4adbe513b48c8daf29697"
 }
 
 ###
@@ -27,8 +53,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Carl",
-  "author": "Carl",
-  "url": "carl url",
-  "likes": 1
+  "title": "Alice cooks food!",
+  "author": "Alice",
+  "url": "Blog url",
+  "user": "63c4aced513b48c8daf29685"
 }
