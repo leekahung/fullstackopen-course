@@ -14,8 +14,8 @@ Personal repo for FullStackOpen's Full Stack coursework for React, Redux, Node.j
 | Part 1  | Introduction to React | Completed/Submitted |
 | Part 2  | Communicating with server | Completed/Submitted |
 | Part 3  | Programming a server with NodeJS and Express | Completed/Submitted |
-| Part 4  | Testing Express servers, user administation | Redoing for Submission |
-| Part 5  | Testing React apps | Completed/Not Submitted |
+| Part 4  | Testing Express servers, user administation | Completed/Not Submitted |
+| Part 5  | Testing React apps | Redoing for Submission |
 | Part 6  | State management with Redux | Completed/Not Submitted |
 | Part 7  | React router, custom hooks, styling app with CSS and webpack | Incomplete |
 | Part 8  | GraphQL | Incomplete |
@@ -33,4 +33,4 @@ The following links are links to apps built during the course using the MERN sta
 
 - Note App: [Live site](https://khl-note-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-note-app)
 - Phonebook App: [Live site](https://khl-phonebook-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-phonebook-app)
-- Blog List App: [Live site](https://khl-bloglist-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-bloglist-app)
+- Blog List App (Unavailable - currently being reorganized): [Live site](https://khl-bloglist-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-bloglist-app)
