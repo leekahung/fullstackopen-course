@@ -32,6 +32,7 @@ const Login = ({
       </form>
     </>
   ) : (
+    // Exercise 5.2
     <button style={buttonStyle} onClick={handleLogout}>
       logout
     </button>
