@@ -32,7 +32,7 @@ const Blogs = ({ user, runNotifications }) => {
 
   return (
     <>
-      <Togglable buttonLabel="new blog" ref={blogFormRef}>
+      <Togglable buttonLabel="create new blog" ref={blogFormRef}>
         <h1>create new</h1>
         <BlogForm
           handleAddBlog={handleAddBlog}
