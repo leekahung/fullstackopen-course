@@ -9,6 +9,7 @@ const BlogInput = ({ inputName, inputValue, handleBlogForm }) => {
   );
 };
 
+// Exercise 5.6
 const BlogForm = ({ handleAddBlog }) => {
   const initialBlogValues = {
     title: "",
