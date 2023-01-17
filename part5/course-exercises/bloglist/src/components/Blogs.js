@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import blogService from "../services/blogs";
+import BlogForm from "./BlogForm";
 
 const Blog = ({ blog }) => {
   return (
@@ -9,21 +10,36 @@ const Blog = ({ blog }) => {
   );
 };
 
-const Blogs = () => {
+const Blogs = ({ user, runNotifications }) => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    blogService.getAll().then((returnedBlogs) => {
-      setBlogs(returnedBlogs);
-    });
-  }, []);
+    if (user) {
+      blogService.getAll().then((returnedBlogs) => {
+        setBlogs(returnedBlogs);
+      });
+    }
+  }, [user]);
+
+  const handleAddBlog = async (blogFormValues) => {
+    const newBlog = await blogService.createNew(blogFormValues);
+    setBlogs(blogs.concat(newBlog));
+    runNotifications(`${newBlog.title} by ${newBlog.author} added`, 5000);
+  };
 
   return (
-    <div>
-      {blogs.map((b) => {
-        return <Blog key={b.id} blog={b} />;
-      })}
-    </div>
+    <>
+      <h1>create new</h1>
+      <BlogForm
+        handleAddBlog={handleAddBlog}
+        runNotifications={runNotifications}
+      />
+      <div>
+        {blogs.map((b) => {
+          return <Blog key={b.id} blog={b} />;
+        })}
+      </div>
+    </>
   );
 };
 

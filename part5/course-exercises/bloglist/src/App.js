@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Login from "./components/Login";
-import Notification from "./components/Notification";
+import Notifications from "./components/Notifications";
 import Blogs from "./components/Blogs";
 import loginService from "./services/login";
 import blogService from "./services/blogs";
@@ -13,13 +13,16 @@ const App = () => {
 
   const [loginValues, setLoginValues] = useState(initialLoginValues);
   const [user, setUser] = useState(null);
-  const [notification, setNotification] = useState("");
+  const [userNotifications, setUserNotifications] = useState("");
+  const [notifications, setNotifications] = useState("");
+  const [timeoutID, setTimeoutID] = useState(null);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
+      setUserNotifications(`${user.name} logged in`);
       blogService.setToken(user.token);
     }
   }, []);
@@ -41,16 +44,26 @@ const App = () => {
       blogService.setToken(user.token);
       setUser(user);
       setLoginValues(initialLoginValues);
-      setNotification(`${user.name} logged in`);
+      setUserNotifications(`${user.name} logged in`);
     } catch (exception) {
-      setNotification("Invalid username or password");
+      setUserNotifications("Invalid username or password");
     }
   };
 
   const handleLogout = async () => {
     window.localStorage.removeItem("loggedUser");
     setUser(null);
-    setNotification("");
+    setUserNotifications("");
+  };
+
+  const runNotifications = (message, time) => {
+    if (timeoutID) {
+      clearTimeout(timeoutID);
+      setNotifications(message);
+    }
+    const timeout = setTimeout(() => setNotifications(""), time);
+    setNotifications(message);
+    setTimeoutID(timeout);
   };
 
   return (
@@ -58,9 +71,11 @@ const App = () => {
       {!user ? (
         <>
           <h1>log in to application</h1>
-          <Notification notification={notification} />
+          <Notifications
+            notifications={notifications}
+            userNotifications={userNotifications}
+          />
           <Login
-            user={user}
             loginValues={loginValues}
             handleLogin={handleLogin}
             handleLoginValues={handleLoginValues}
@@ -69,9 +84,12 @@ const App = () => {
       ) : (
         <>
           <h1>blogs</h1>
-          <Notification notification={notification} />
-          <Login user={user} handleLogout={handleLogout} />
-          <Blogs />
+          <Notifications
+            notifications={notifications}
+            userNotifications={userNotifications}
+            handleLogout={handleLogout}
+          />
+          <Blogs user={user} runNotifications={runNotifications} />
         </>
       )}
     </div>

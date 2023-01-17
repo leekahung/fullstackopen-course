@@ -30,6 +30,7 @@ blogRouter.post("/", userExtractor, async (request, response) => {
 
   const newBlog = new Blog({
     ...body,
+    likes: body.likes || 0,
     user: user._id,
   });
 
@@ -37,7 +38,11 @@ blogRouter.post("/", userExtractor, async (request, response) => {
   user.blogs = user.blogs.concat(savedBlog._id);
   await user.save();
 
-  response.status(201).json(savedBlog);
+  const returnedSavedBlog = await Blog.findById(savedBlog._id).populate(
+    "user",
+    { name: 1 }
+  );
+  response.status(201).json(returnedSavedBlog);
 });
 
 blogRouter.delete("/:id", userExtractor, async (request, response) => {

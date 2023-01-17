@@ -18,7 +18,6 @@ const {
 } = require("./utils/middleware");
 
 const mongoUrl = config.MONGODB_URI;
-console.log(mongoUrl);
 mongoose.connect(mongoUrl).then((response) => {
   if (response) {
     console.log("Connected to MongoDB database");
