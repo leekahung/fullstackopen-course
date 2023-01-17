@@ -4,9 +4,22 @@ import BlogForm from "./BlogForm";
 import Togglable from "./Togglable";
 
 const Blog = ({ blog }) => {
+  const style = {
+    padding: "5px",
+    marginBottom: "5px",
+    border: "1px solid",
+  };
+
   return (
-    <div>
-      {blog.title} {blog.author}
+    <div style={style}>
+      {blog.title} {blog.author}{" "}
+      <Togglable buttonLabel="view" closeLabel="hide" buttonLocation="same">
+        <div>{blog.url}</div>
+        <div>
+          likes {blog.likes} <button>like</button>
+        </div>
+        <div>{blog.user.name}</div>
+      </Togglable>
     </div>
   );
 };
