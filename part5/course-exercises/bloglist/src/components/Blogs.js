@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import blogService from "../services/blogs";
 import BlogForm from "./BlogForm";
+import Togglable from "./Togglable";
 
 const Blog = ({ blog }) => {
   return (
@@ -12,6 +13,7 @@ const Blog = ({ blog }) => {
 
 const Blogs = ({ user, runNotifications }) => {
   const [blogs, setBlogs] = useState([]);
+  const blogFormRef = useRef();
 
   useEffect(() => {
     if (user) {
@@ -25,15 +27,18 @@ const Blogs = ({ user, runNotifications }) => {
     const newBlog = await blogService.createNew(blogFormValues);
     setBlogs(blogs.concat(newBlog));
     runNotifications(`${newBlog.title} by ${newBlog.author} added`, 5000);
+    blogFormRef.current.toggleVisibility();
   };
 
   return (
     <>
-      <h1>create new</h1>
-      <BlogForm
-        handleAddBlog={handleAddBlog}
-        runNotifications={runNotifications}
-      />
+      <Togglable buttonLabel="new blog" ref={blogFormRef}>
+        <h1>create new</h1>
+        <BlogForm
+          handleAddBlog={handleAddBlog}
+          runNotifications={runNotifications}
+        />
+      </Togglable>
       <div>
         {blogs.map((b) => {
           return <Blog key={b.id} blog={b} />;
