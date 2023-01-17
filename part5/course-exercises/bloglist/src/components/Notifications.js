@@ -4,14 +4,12 @@ const Logout = ({ handleLogout }) => {
 
 const Notifications = ({ notifications, userNotifications, handleLogout }) => {
   const style =
-    notifications !== ""
+    notifications.message !== ""
       ? {
           fontSize: "20px",
           padding: "10px",
           marginBottom: "10px",
           backgroundColor: "lightgrey",
-          color: "green",
-          border: "2px solid green",
           borderRadius: "5px",
         }
       : { display: "none" };
@@ -25,7 +23,15 @@ const Notifications = ({ notifications, userNotifications, handleLogout }) => {
 
   return (
     <>
-      <div style={style}>{notifications}</div>
+      <div
+        style={
+          notifications.type === "error"
+            ? { ...style, color: "red", border: "2px solid red" }
+            : { ...style, color: "green", border: "2px solid green" }
+        }
+      >
+        {notifications.message}
+      </div>
       <div style={styleUser}>
         {userNotifications}{" "}
         {handleLogout ? <Logout handleLogout={handleLogout} /> : null}

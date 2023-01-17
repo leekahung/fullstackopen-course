@@ -11,10 +11,15 @@ const App = () => {
     password: "",
   };
 
+  const initialNotification = {
+    message: "",
+    type: "",
+  };
+
   const [loginValues, setLoginValues] = useState(initialLoginValues);
   const [user, setUser] = useState(null);
   const [userNotifications, setUserNotifications] = useState("");
-  const [notifications, setNotifications] = useState("");
+  const [notifications, setNotifications] = useState(initialNotification);
   const [timeoutID, setTimeoutID] = useState(null);
 
   useEffect(() => {
@@ -46,7 +51,7 @@ const App = () => {
       setLoginValues(initialLoginValues);
       setUserNotifications(`${user.name} logged in`);
     } catch (exception) {
-      setUserNotifications("Invalid username or password");
+      runNotifications("Invalid username or password", 5000, "error");
     }
   };
 
@@ -56,13 +61,16 @@ const App = () => {
     setUserNotifications("");
   };
 
-  const runNotifications = (message, time) => {
+  const runNotifications = (message, time, type = "") => {
     if (timeoutID) {
       clearTimeout(timeoutID);
-      setNotifications(message);
+      setNotifications({ message, type });
     }
-    const timeout = setTimeout(() => setNotifications(""), time);
-    setNotifications(message);
+    const timeout = setTimeout(
+      () => setNotifications(initialNotification),
+      time
+    );
+    setNotifications({ message, type });
     setTimeoutID(timeout);
   };
 
