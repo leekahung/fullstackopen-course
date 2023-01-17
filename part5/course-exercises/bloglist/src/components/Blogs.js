@@ -3,11 +3,15 @@ import blogService from "../services/blogs";
 import BlogForm from "./BlogForm";
 import Togglable from "./Togglable";
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, handleLikeBlog }) => {
   const style = {
     padding: "5px",
     marginBottom: "5px",
     border: "1px solid",
+  };
+
+  const handleClickLike = (blog) => {
+    handleLikeBlog(blog);
   };
 
   return (
@@ -16,7 +20,8 @@ const Blog = ({ blog }) => {
       <Togglable buttonLabel="view" closeLabel="hide" buttonLocation="same">
         <div>{blog.url}</div>
         <div>
-          likes {blog.likes} <button>like</button>
+          likes {blog.likes}{" "}
+          <button onClick={() => handleClickLike(blog)}>like</button>
         </div>
         <div>{blog.user.name}</div>
       </Togglable>
@@ -43,6 +48,16 @@ const Blogs = ({ user, runNotifications }) => {
     blogFormRef.current.toggleVisibility();
   };
 
+  const handleLikeBlog = async (blog) => {
+    const blogLiked = {
+      ...blog,
+      likes: blog.likes + 1,
+    };
+
+    const updatedBlog = await blogService.updateObject(blogLiked);
+    setBlogs(blogs.map((b) => (b.id === blogLiked.id ? updatedBlog : b)));
+  };
+
   return (
     <>
       <Togglable buttonLabel="create new blog" ref={blogFormRef}>
@@ -54,7 +69,7 @@ const Blogs = ({ user, runNotifications }) => {
       </Togglable>
       <div>
         {blogs.map((b) => {
-          return <Blog key={b.id} blog={b} />;
+          return <Blog key={b.id} blog={b} handleLikeBlog={handleLikeBlog} />;
         })}
       </div>
     </>

@@ -68,19 +68,14 @@ blogRouter.delete("/:id", userExtractor, async (request, response) => {
   }
 });
 
-blogRouter.put(":/id", async (request, response) => {
-  const body = request.body;
-  const blogToUpdate = await Blog.findById(request.params.id);
-  const updateBlog = {
-    ...blogToUpdate,
-    likes: body.likes + 1,
-  };
+blogRouter.put("/:id", async (request, response) => {
+  const { user, ...bodyToUpdate } = request.body;
 
   const updatedBlog = await Blog.findByIdAndUpdate(
     request.params.id,
-    updateBlog,
+    bodyToUpdate,
     { new: true }
-  );
+  ).populate("user", { username: 1, name: 1 });
 
   response.status(202).json(updatedBlog);
 });

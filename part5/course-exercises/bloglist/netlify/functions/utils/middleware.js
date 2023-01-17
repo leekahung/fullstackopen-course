@@ -5,7 +5,7 @@ const User = require("../models/user");
 
 morgan.token("body", (request) => JSON.stringify(request.body));
 const middlewareLogger = morgan(`
-  Method: :method,
+  Method: :method
   Path - Status: :url :status
   Body: :body
 `);
