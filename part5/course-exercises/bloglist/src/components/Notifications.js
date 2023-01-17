@@ -2,7 +2,7 @@ const Logout = ({ handleLogout }) => {
   return <button onClick={handleLogout}>logout</button>;
 };
 
-const Notifications = ({ notifications, userNotifications, handleLogout }) => {
+const Notifications = ({ notifications, userStatus, handleLogout }) => {
   const style =
     notifications.message !== ""
       ? {
@@ -15,7 +15,7 @@ const Notifications = ({ notifications, userNotifications, handleLogout }) => {
       : { display: "none" };
 
   const styleUser =
-    userNotifications !== ""
+    userStatus !== ""
       ? {
           paddingBottom: "10px",
         }
@@ -33,7 +33,7 @@ const Notifications = ({ notifications, userNotifications, handleLogout }) => {
         {notifications.message}
       </div>
       <div style={styleUser}>
-        {userNotifications}{" "}
+        {userStatus}{" "}
         {handleLogout ? <Logout handleLogout={handleLogout} /> : null}
       </div>
     </>

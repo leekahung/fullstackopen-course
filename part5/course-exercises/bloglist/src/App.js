@@ -18,7 +18,7 @@ const App = () => {
 
   const [loginValues, setLoginValues] = useState(initialLoginValues);
   const [user, setUser] = useState(null);
-  const [userNotifications, setUserNotifications] = useState("");
+  const [userStatus, setUserStatus] = useState("");
   const [notifications, setNotifications] = useState(initialNotification);
   const [timeoutID, setTimeoutID] = useState(null);
 
@@ -27,7 +27,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
-      setUserNotifications(`${user.name} logged in`);
+      setUserStatus(`${user.name} logged in`);
       blogService.setToken(user.token);
     }
   }, []);
@@ -49,7 +49,7 @@ const App = () => {
       blogService.setToken(user.token);
       setUser(user);
       setLoginValues(initialLoginValues);
-      setUserNotifications(`${user.name} logged in`);
+      setUserStatus(`${user.name} logged in`);
     } catch (exception) {
       runNotifications("Invalid username or password", 5000, "error");
     }
@@ -58,7 +58,7 @@ const App = () => {
   const handleLogout = async () => {
     window.localStorage.removeItem("loggedUser");
     setUser(null);
-    setUserNotifications("");
+    setUserStatus("");
   };
 
   const runNotifications = (message, time, type = "") => {
@@ -81,7 +81,7 @@ const App = () => {
           <h1>log in to application</h1>
           <Notifications
             notifications={notifications}
-            userNotifications={userNotifications}
+            userStatus={userStatus}
           />
           <Login
             loginValues={loginValues}
@@ -94,7 +94,7 @@ const App = () => {
           <h1>blogs</h1>
           <Notifications
             notifications={notifications}
-            userNotifications={userNotifications}
+            userStatus={userStatus}
             handleLogout={handleLogout}
           />
           <Blogs user={user} runNotifications={runNotifications} />
