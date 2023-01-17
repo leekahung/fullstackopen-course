@@ -33,10 +33,14 @@ const Blogs = ({ user, runNotifications }) => {
   const [blogs, setBlogs] = useState([]);
   const blogFormRef = useRef();
 
+  const sortBlogsByLikes = (blog1, blog2) => {
+    return blog2.likes - blog1.likes;
+  };
+
   useEffect(() => {
     if (user) {
       blogService.getAll().then((returnedBlogs) => {
-        setBlogs(returnedBlogs);
+        setBlogs(returnedBlogs.sort((a, b) => sortBlogsByLikes(a, b)));
       });
     }
   }, [user]);
@@ -55,7 +59,11 @@ const Blogs = ({ user, runNotifications }) => {
     };
 
     const updatedBlog = await blogService.updateObject(blogLiked);
-    setBlogs(blogs.map((b) => (b.id === blogLiked.id ? updatedBlog : b)));
+    setBlogs(
+      blogs
+        .map((b) => (b.id === blogLiked.id ? updatedBlog : b))
+        .sort((a, b) => sortBlogsByLikes(a, b))
+    );
   };
 
   return (
