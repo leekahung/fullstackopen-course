@@ -3,7 +3,7 @@ import blogService from "../services/blogs";
 import BlogForm from "./BlogForm";
 import Togglable from "./Togglable";
 
-const Blog = ({ blog, handleLikeBlog }) => {
+const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
   const style = {
     padding: "5px",
     marginBottom: "5px",
@@ -12,6 +12,10 @@ const Blog = ({ blog, handleLikeBlog }) => {
 
   const handleClickLike = (blog) => {
     handleLikeBlog(blog);
+  };
+
+  const handleClickDelete = (blog) => {
+    handleDeleteBlog(blog);
   };
 
   return (
@@ -24,6 +28,7 @@ const Blog = ({ blog, handleLikeBlog }) => {
           <button onClick={() => handleClickLike(blog)}>like</button>
         </div>
         <div>{blog.user.name}</div>
+        <button onClick={() => handleClickDelete(blog)}>delete</button>
       </Togglable>
     </div>
   );
@@ -53,17 +58,37 @@ const Blogs = ({ user, runNotifications }) => {
   };
 
   const handleLikeBlog = async (blog) => {
-    const blogLiked = {
-      ...blog,
-      likes: blog.likes + 1,
-    };
-
+    const blogLiked = { id: blog.id, likes: blog.likes + 1 };
     const updatedBlog = await blogService.updateObject(blogLiked);
     setBlogs(
       blogs
         .map((b) => (b.id === blogLiked.id ? updatedBlog : b))
         .sort((a, b) => sortBlogsByLikes(a, b))
     );
+  };
+
+  const handleDeleteBlog = async (blog) => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+      try {
+        await blogService.removeObject(blog.id);
+        setBlogs(blogs.filter((b) => b.id !== blog.id));
+        runNotifications(`Blog ${blog.title} by ${blog.author} removed`, 5000);
+      } catch (exception) {
+        if (exception.response.status === 401) {
+          runNotifications(
+            `Error: Only original blog post user can delete this post`,
+            5000,
+            "error"
+          );
+        } else {
+          runNotifications(
+            `Error: Error trying to remove blog post from database`,
+            5000,
+            "error"
+          );
+        }
+      }
+    }
   };
 
   return (
@@ -77,7 +102,14 @@ const Blogs = ({ user, runNotifications }) => {
       </Togglable>
       <div>
         {blogs.map((b) => {
-          return <Blog key={b.id} blog={b} handleLikeBlog={handleLikeBlog} />;
+          return (
+            <Blog
+              key={b.id}
+              blog={b}
+              handleLikeBlog={handleLikeBlog}
+              handleDeleteBlog={handleDeleteBlog}
+            />
+          );
         })}
       </div>
     </>
