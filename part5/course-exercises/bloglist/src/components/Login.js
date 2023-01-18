@@ -23,7 +23,9 @@ const Login = ({ loginValues, handleLogin, handleLoginValues }) => {
           onChange={handleLoginValues}
         />
       </div>
-      <button style={buttonStyle}>login</button>
+      <button id="login-btn" style={buttonStyle}>
+        login
+      </button>
     </form>
   );
 };
