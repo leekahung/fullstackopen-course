@@ -17,7 +17,7 @@ const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
   };
 
   return (
-    <div className="blog-info" style={style}>
+    <li className="blog-info" style={style}>
       {blog.title} {blog.author}{" "}
       <Togglable buttonLabel="view" closeLabel="hide" buttonLocation="same">
         <div className="blog-url">{blog.url}</div>
@@ -32,7 +32,7 @@ const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
           delete
         </button>
       </Togglable>
-    </div>
+    </li>
   );
 };
 

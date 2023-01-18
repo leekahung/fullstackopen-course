@@ -90,5 +90,36 @@ describe("Blog App", function () {
         .should("have.css", "color", "rgb(255, 0, 0)")
         .should("have.css", "border", "2px solid rgb(255, 0, 0)");
     });
+
+    it("blogs are sorted by likes", function () {
+      cy.createBlog({
+        title: "second liked blog",
+        author: "second liked author",
+        url: "some url",
+        likes: 5,
+      });
+      cy.createBlog({
+        title: "most liked blog",
+        author: "most liked author",
+        url: "some url",
+        likes: 10,
+      });
+      cy.createBlog({
+        title: "third liked blog",
+        author: "third liked author",
+        url: "some url",
+        likes: 0,
+      });
+
+      cy.get(".blog-list>.blog-info")
+        .eq(0)
+        .should("contain", "most liked blog");
+      cy.get(".blog-list>.blog-info")
+        .eq(1)
+        .should("contain", "second liked blog");
+      cy.get(".blog-list>.blog-info")
+        .eq(2)
+        .should("contain", "third liked blog");
+    });
   });
 });

@@ -68,6 +68,11 @@ const Blogs = ({ user, runNotifications }) => {
     }
   };
 
+  const styleList = {
+    listStyleType: "none",
+    paddingLeft: "0px",
+  };
+
   return (
     <>
       <Togglable buttonLabel="create new blog" ref={blogFormRef}>
@@ -77,7 +82,7 @@ const Blogs = ({ user, runNotifications }) => {
           runNotifications={runNotifications}
         />
       </Togglable>
-      <div>
+      <ul style={styleList} className="blog-list">
         {blogs.map((b) => {
           return (
             <Blog
@@ -88,7 +93,7 @@ const Blogs = ({ user, runNotifications }) => {
             />
           );
         })}
-      </div>
+      </ul>
     </>
   );
 };
