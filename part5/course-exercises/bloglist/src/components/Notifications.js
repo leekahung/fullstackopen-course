@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
 
 const Logout = ({ handleLogout }) => {
-  return <button onClick={handleLogout}>logout</button>;
+  return (
+    <button id="logout-btn" onClick={handleLogout}>
+      logout
+    </button>
+  );
 };
 
 const Notifications = ({ notifications, userStatus, handleLogout }) => {

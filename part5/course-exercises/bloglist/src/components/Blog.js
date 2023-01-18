@@ -28,7 +28,9 @@ const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
           </button>
         </div>
         <div>{blog.user.name}</div>
-        <button onClick={() => handleClickDelete(blog)}>delete</button>
+        <button className="delete-btn" onClick={() => handleClickDelete(blog)}>
+          delete
+        </button>
       </Togglable>
     </div>
   );

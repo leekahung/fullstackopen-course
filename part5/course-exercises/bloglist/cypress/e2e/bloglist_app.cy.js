@@ -6,7 +6,13 @@ describe("Blog App", function () {
       username: "testuser",
       password: "test",
     };
+    const testUser2 = {
+      name: "Test User 2",
+      username: "testuser2",
+      password: "test2",
+    };
     cy.request("POST", "http://localhost:8888/api/users", testUser);
+    cy.request("POST", "http://localhost:8888/api/users", testUser2);
     cy.visit("http://localhost:8888");
   });
 
@@ -37,11 +43,14 @@ describe("Blog App", function () {
     });
   });
 
-  describe("When logged in", function () {
+  describe("When testuser logged in", function () {
     beforeEach(function () {
-      cy.get("input:first").type("testuser");
-      cy.get("input:last").type("test");
-      cy.get("#login-btn").click();
+      cy.login({ username: "testuser", password: "test" });
+    });
+
+    it("Can logout", function () {
+      cy.get("#logout-btn").click();
+      cy.contains("log in to application");
     });
 
     it("A blog can be created", function () {
@@ -55,15 +64,31 @@ describe("Blog App", function () {
     });
 
     it("A blog can be liked", function () {
-      cy.contains("create new blog").click();
-      cy.get(".input-title").type("Wow Blog");
-      cy.get(".input-author").type("This Author");
-      cy.get(".input-url").type("Epic url");
-      cy.get(".create-blog-btn").click();
-
+      cy.createBlog({ title: "My Blog", author: "My Author", url: "My url" });
       cy.get(".blog-info").find(".toggler").click();
       cy.get(".like-btn").click();
       cy.contains("likes 1 like");
+    });
+
+    it("A blog can be deleted", function () {
+      cy.createBlog({ title: "My Blog", author: "My Author", url: "My url" });
+      cy.get(".blog-info").find(".toggler").click();
+      cy.get(".delete-btn").click();
+      cy.get(".blog-info").should("not.exist");
+    });
+
+    it("A blog by another user cannot be deleted", function () {
+      cy.get("#logout-btn").click();
+      cy.login({ username: "testuser2", password: "test2" });
+      cy.createBlog({ title: "My Blog", author: "My Author", url: "My url" });
+      cy.get("#logout-btn").click();
+      cy.login({ username: "testuser", password: "test" });
+
+      cy.get(".blog-info").find(".toggler").click();
+      cy.get(".delete-btn").click();
+      cy.contains("Error: Only original blog post user can delete this post")
+        .should("have.css", "color", "rgb(255, 0, 0)")
+        .should("have.css", "border", "2px solid rgb(255, 0, 0)");
     });
   });
 });
