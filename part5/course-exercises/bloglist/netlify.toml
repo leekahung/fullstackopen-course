@@ -1,7 +1,7 @@
 [build]
-  command = "pnpm buid"
+  command = "pnpm build"
   publish = "build"
-  functions = "netlify/functions/"
+  functions = "/netlify/functions/"
 
 [functions]
   node_bundler = "esbuild"
