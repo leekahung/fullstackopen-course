@@ -24,7 +24,10 @@ const Blogs = ({ user, runNotifications }) => {
   const handleAddBlog = async (blogFormValues) => {
     const newBlog = await blogService.createNew(blogFormValues);
     setBlogs(blogs.concat(newBlog));
-    runNotifications(`${newBlog.title} by ${newBlog.author} added`, 5000);
+    runNotifications(
+      `Blog "${newBlog.title}" by ${newBlog.author} added`,
+      5000
+    );
     blogFormRef.current.toggleVisibility();
   };
 
@@ -39,11 +42,14 @@ const Blogs = ({ user, runNotifications }) => {
   };
 
   const handleDeleteBlog = async (blog) => {
-    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
+    if (window.confirm(`Remove blog "${blog.title}" by ${blog.author}?`)) {
       try {
         await blogService.removeObject(blog.id);
         setBlogs(blogs.filter((b) => b.id !== blog.id));
-        runNotifications(`Blog ${blog.title} by ${blog.author} removed`, 5000);
+        runNotifications(
+          `Blog "${blog.title}" by ${blog.author} removed`,
+          5000
+        );
       } catch (exception) {
         if (exception.response.status === 401) {
           runNotifications(

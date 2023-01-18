@@ -36,4 +36,22 @@ describe("Blog App", function () {
         .should("have.css", "border", "2px solid rgb(255, 0, 0)");
     });
   });
+
+  describe("When logged in", function () {
+    beforeEach(function () {
+      cy.get("input:first").type("testuser");
+      cy.get("input:last").type("test");
+      cy.get("#login-btn").click();
+    });
+
+    it("A blog can be created", function () {
+      cy.contains("create new blog").click();
+      cy.get(".input-title").type("Wow Blog");
+      cy.get(".input-author").type("This Author");
+      cy.get(".input-url").type("Epic url");
+      cy.get(".create-blog-btn").click();
+      cy.contains('Blog "Wow Blog" by This Author added');
+      cy.contains("Wow Blog This Author view");
+    });
+  });
 });

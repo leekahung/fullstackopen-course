@@ -7,6 +7,7 @@ const BlogInput = ({ inputName, inputValue, handleBlogForm }) => {
       <label>{inputName}: </label>
       <input
         name={inputName}
+        className={`input-${inputName}`}
         placeholder={`new ${inputName}`}
         value={inputValue}
         onChange={handleBlogForm}
@@ -49,7 +50,7 @@ const BlogForm = ({ handleAddBlog }) => {
           />
         );
       })}
-      <button>create</button>
+      <button className="create-blog-btn">create</button>
     </form>
   );
 };

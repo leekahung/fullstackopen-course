@@ -19,6 +19,7 @@ module.exports = {
     "prettier/prettier": "error",
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
+    "no-useless-escape": "ignore",
     semi: ["error", "always"],
     eqeqeq: "error",
     "no-trailing-spaces": "error",
