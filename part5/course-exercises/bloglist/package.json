@@ -25,7 +25,9 @@
     "build": "react-scripts build",
     "test": "NODE_ENV=test react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "NODE_ENV=development netlify dev"
+    "dev": "NODE_ENV=development netlify dev",
+    "cypress:open": "NODE_ENV=test cypress open",
+    "start:test": "NODE_ENV=test netlify dev"
   },
   "eslintConfig": {
     "extends": [
@@ -49,8 +51,10 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "cypress": "^12.3.0",
     "dotenv": "^16.0.3",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.3"

@@ -33,6 +33,11 @@ app.use("/api/login", loginRouter);
 app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
 
+if (process.env.NODE_ENV === "test") {
+  const testingRouter = require("./controllers/testing");
+  app.use("/api/testing", testingRouter);
+}
+
 app.use(errorHandler);
 
 const serverless = require("serverless-http");
