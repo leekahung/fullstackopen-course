@@ -5,7 +5,12 @@ const BlogInput = ({ inputName, inputValue, handleBlogForm }) => {
   return (
     <div>
       <label>{inputName}: </label>
-      <input name={inputName} value={inputValue} onChange={handleBlogForm} />
+      <input
+        name={inputName}
+        placeholder={`new ${inputName}`}
+        value={inputValue}
+        onChange={handleBlogForm}
+      />
     </div>
   );
 };
