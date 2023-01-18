@@ -27,4 +27,18 @@ describe("<Blog />", () => {
     const togglable = container.querySelector(".blog-url").parentElement;
     expect(togglable).toHaveStyle("display: none");
   });
+
+  test("check url and likes are rendered when view button is toggled", async () => {
+    const user = userEvent.setup();
+    const viewBtn = screen.getByText("view");
+    await user.click(viewBtn);
+
+    const blogUrl = container.querySelector(".blog-url");
+    expect(blogUrl).toHaveTextContent("some url");
+    const blogLikes = container.querySelector(".blog-likes");
+    expect(blogLikes).toHaveTextContent("likes 4 like");
+
+    const togglable = blogUrl.parentElement;
+    expect(togglable).not.toHaveStyle("display: none");
+  });
 });
