@@ -53,5 +53,17 @@ describe("Blog App", function () {
       cy.contains('Blog "Wow Blog" by This Author added');
       cy.contains("Wow Blog This Author view");
     });
+
+    it("A blog can be liked", function () {
+      cy.contains("create new blog").click();
+      cy.get(".input-title").type("Wow Blog");
+      cy.get(".input-author").type("This Author");
+      cy.get(".input-url").type("Epic url");
+      cy.get(".create-blog-btn").click();
+
+      cy.get(".blog-info").find(".toggler").click();
+      cy.get(".like-btn").click();
+      cy.contains("likes 1 like");
+    });
   });
 });

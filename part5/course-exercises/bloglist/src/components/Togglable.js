@@ -23,7 +23,11 @@ const Togglable = forwardRef(
 
     return buttonLocation === "bottom" ? (
       <>
-        <button style={hideWhenVisible} onClick={toggleVisibility}>
+        <button
+          className="toggler"
+          style={hideWhenVisible}
+          onClick={toggleVisibility}
+        >
           {buttonLabel}
         </button>
         <div style={showWhenVisible}>
@@ -33,7 +37,7 @@ const Togglable = forwardRef(
       </>
     ) : (
       <>
-        <button onClick={toggleVisibility}>
+        <button className="toggler" onClick={toggleVisibility}>
           {visible ? closeLabel : buttonLabel}
         </button>
         <div style={showWhenVisible}>{children}</div>
