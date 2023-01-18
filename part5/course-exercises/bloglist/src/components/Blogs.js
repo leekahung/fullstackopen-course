@@ -1,39 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import blogService from "../services/blogs";
 import BlogForm from "./BlogForm";
+import Blog from "./Blog";
 import Togglable from "./Togglable";
 import PropTypes from "prop-types";
-
-const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
-  const style = {
-    padding: "5px",
-    marginBottom: "5px",
-    border: "1px solid",
-  };
-
-  const handleClickLike = (blog) => {
-    handleLikeBlog(blog);
-  };
-
-  const handleClickDelete = (blog) => {
-    handleDeleteBlog(blog);
-  };
-
-  return (
-    <div style={style}>
-      {blog.title} {blog.author}{" "}
-      <Togglable buttonLabel="view" closeLabel="hide" buttonLocation="same">
-        <div>{blog.url}</div>
-        <div>
-          likes {blog.likes}{" "}
-          <button onClick={() => handleClickLike(blog)}>like</button>
-        </div>
-        <div>{blog.user.name}</div>
-        <button onClick={() => handleClickDelete(blog)}>delete</button>
-      </Togglable>
-    </div>
-  );
-};
 
 const Blogs = ({ user, runNotifications }) => {
   const [blogs, setBlogs] = useState([]);
@@ -120,12 +90,6 @@ const Blogs = ({ user, runNotifications }) => {
 Blogs.propTypes = {
   user: PropTypes.object.isRequired,
   runNotifications: PropTypes.func.isRequired,
-};
-
-Blog.propTypes = {
-  blog: PropTypes.object.isRequired,
-  handleLikeBlog: PropTypes.func.isRequired,
-  handleDeleteBlog: PropTypes.func.isRequired,
 };
 
 export default Blogs;
