@@ -77,13 +77,13 @@ const Blogs = ({ user, runNotifications }) => {
       } catch (exception) {
         if (exception.response.status === 401) {
           runNotifications(
-            `Error: Only original blog post user can delete this post`,
+            "Error: Only original blog post user can delete this post",
             5000,
             "error"
           );
         } else {
           runNotifications(
-            `Error: Error trying to remove blog post from database`,
+            "Error: Error trying to remove blog post from database",
             5000,
             "error"
           );
