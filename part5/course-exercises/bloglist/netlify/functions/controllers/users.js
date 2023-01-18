@@ -47,11 +47,11 @@ userRouter.post("/", async (request, response) => {
   const saltRounds = 10;
   const passwordHash = bcrypt.hash(password, saltRounds);
 
-  const user = {
+  const user = new User({
     username,
     name,
     passwordHash,
-  };
+  });
 
   const savedUser = await user.save();
   response.status(201).json(savedUser);
