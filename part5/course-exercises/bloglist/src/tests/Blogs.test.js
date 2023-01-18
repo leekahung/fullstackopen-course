@@ -6,6 +6,7 @@ import Blog from "../components/Blog";
 
 describe("<Blog />", () => {
   let container;
+  const handleLikeBlog = jest.fn();
 
   beforeEach(() => {
     const blog = {
@@ -16,7 +17,9 @@ describe("<Blog />", () => {
       user: "user name",
     };
 
-    container = render(<Blog blog={blog} />).container;
+    container = render(
+      <Blog blog={blog} handleLikeBlog={handleLikeBlog} />
+    ).container;
   });
 
   test("renders blog title and author, but not url or likes by default", async () => {
@@ -40,5 +43,17 @@ describe("<Blog />", () => {
 
     const togglable = blogUrl.parentElement;
     expect(togglable).not.toHaveStyle("display: none");
+  });
+
+  test("check event handler is called twice when like button is clicked twice", async () => {
+    const user = userEvent.setup();
+    const viewBtn = screen.getByText("view");
+    await user.click(viewBtn);
+
+    const likeBtn = container.querySelector(".like-btn");
+    await user.click(likeBtn);
+    await user.click(likeBtn);
+
+    expect(handleLikeBlog.mock.calls).toHaveLength(2);
   });
 });
