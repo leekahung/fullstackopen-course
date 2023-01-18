@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import blogService from "../services/blogs";
 import BlogForm from "./BlogForm";
 import Togglable from "./Togglable";
+import PropTypes from "prop-types";
 
 const Blog = ({ blog, handleLikeBlog, handleDeleteBlog }) => {
   const style = {
@@ -114,6 +115,17 @@ const Blogs = ({ user, runNotifications }) => {
       </div>
     </>
   );
+};
+
+Blogs.propTypes = {
+  user: PropTypes.object.isRequired,
+  runNotifications: PropTypes.func.isRequired,
+};
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  handleLikeBlog: PropTypes.func.isRequired,
+  handleDeleteBlog: PropTypes.func.isRequired,
 };
 
 export default Blogs;

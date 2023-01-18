@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Logout = ({ handleLogout }) => {
   return <button onClick={handleLogout}>logout</button>;
 };
@@ -38,6 +40,16 @@ const Notifications = ({ notifications, userStatus, handleLogout }) => {
       </div>
     </>
   );
+};
+
+Logout.propTypes = {
+  handleLogout: PropTypes.func.isRequired,
+};
+
+Notifications.propTypes = {
+  notifications: PropTypes.object.isRequired,
+  userStatus: PropTypes.string.isRequired,
+  handleLogout: PropTypes.func,
 };
 
 export default Notifications;

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Login = ({ loginValues, handleLogin, handleLoginValues }) => {
   const buttonStyle = {
     margin: "10px 0",
@@ -24,6 +26,12 @@ const Login = ({ loginValues, handleLogin, handleLoginValues }) => {
       <button style={buttonStyle}>login</button>
     </form>
   );
+};
+
+Login.propTypes = {
+  loginValues: PropTypes.object.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  handleLoginValues: PropTypes.func.isRequired,
 };
 
 export default Login;
