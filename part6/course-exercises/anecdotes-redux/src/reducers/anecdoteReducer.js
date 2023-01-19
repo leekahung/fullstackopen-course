@@ -29,6 +29,9 @@ const anecdoteReducer = (state = initialState, action) => {
       };
 
       return state.map((a) => (a.id === action.data.id ? updateAnecdote : a));
+    case "NEW":
+      const content = action.data.content;
+      return [...state, { content, vote: 0, id: generateId() }];
     default:
       return state;
   }
@@ -38,6 +41,15 @@ export const addVote = (id) => {
   return {
     type: "VOTE",
     data: { id },
+  };
+};
+
+export const addAnecdote = (content) => {
+  return {
+    type: "NEW",
+    data: {
+      content,
+    },
   };
 };
 

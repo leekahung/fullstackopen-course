@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addVote } from "./reducers/anecdoteReducer";
+import AnecdoteForm from "./components/AnecdoteForm";
 
 const Anecdote = ({ anecdote, handleAddVote }) => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           />
         );
       })}
+      <AnecdoteForm />
     </div>
   );
 };
