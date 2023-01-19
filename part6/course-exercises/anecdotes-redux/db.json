@@ -39,6 +39,11 @@
       "content": "Another new anecdote to add",
       "votes": 2,
       "id": "T8koSXZ"
+    },
+    {
+      "content": "Third anecdote to boot!",
+      "votes": 0,
+      "id": "DVcSEYI"
     }
   ]
 }
