@@ -6,6 +6,7 @@ const Notification = () => {
   const style = {
     border: "1px solid",
     padding: "10px",
+    margin: "10px 0",
   };
 
   return notification.message ? (
