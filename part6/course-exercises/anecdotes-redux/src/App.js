@@ -15,7 +15,12 @@ const Anecdote = ({ anecdote, handleAddVote }) => {
 
 const App = () => {
   const dispatch = useDispatch();
-  const anecdotes = useSelector((state) => state);
+  const anecdotes = useSelector((state) => {
+    const sortedAnecdotes = state.sort((a, b) => {
+      return b.vote - a.vote;
+    });
+    return sortedAnecdotes;
+  });
 
   return (
     <div className="App">
