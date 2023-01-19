@@ -4,3 +4,8 @@ The version on this repository is local to developer. Links related to SPA deplo
 
 - Deployment Link: [Link to live site](https://khl-bloglist-app.netlify.app/)
 - Deployment Repository: [Repository Link](https://github.com/leekahung/fullstackopen-bloglist-app)
+
+Test account for login:
+
+- username: bobIsCool
+- password: cool

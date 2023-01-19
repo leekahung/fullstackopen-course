@@ -33,4 +33,4 @@ The following links are links to apps built during the course using the MERN sta
 
 - Note App: [Live site](https://khl-note-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-note-app)
 - Phonebook App: [Live site](https://khl-phonebook-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-phonebook-app)
-- Blog List App (Unavailable - currently being reorganized): [Live site](https://khl-bloglist-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-bloglist-app)
+- Blog List App: [Live site](https://khl-bloglist-app.netlify.app/) | [GitHub Repository](https://github.com/leekahung/fullstackopen-bloglist-app) -> Test account for login (username: bobIsCool, password: cool)
