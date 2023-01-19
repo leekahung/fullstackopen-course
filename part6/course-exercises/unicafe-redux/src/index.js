@@ -8,6 +8,7 @@ import countReducer from "./reducers/countReducer";
 const store = createStore(countReducer);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+// Exercise 6.2
 const renderApp = () =>
   root.render(
     <React.StrictMode>
