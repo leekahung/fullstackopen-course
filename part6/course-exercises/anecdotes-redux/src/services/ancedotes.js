@@ -7,6 +7,25 @@ const getAll = async () => {
   return response.data;
 };
 
-const anecdoteService = { getAll };
+const createNew = async (content) => {
+  const newObject = {
+    content,
+    votes: 0,
+  };
+  const response = await axios.post(baseUrl, newObject);
+  return response.data;
+};
+
+const updateObject = async (objectToUpdate) => {
+  const id = objectToUpdate.id;
+  const updatedObject = {
+    ...objectToUpdate,
+    votes: objectToUpdate.votes + 1,
+  };
+  const response = await axios.put(`${baseUrl}/${id}`, updatedObject);
+  return response.data;
+};
+
+const anecdoteService = { getAll, createNew, updateObject };
 
 export default anecdoteService;
