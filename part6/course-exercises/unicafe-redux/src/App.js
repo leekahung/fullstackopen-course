@@ -1,3 +1,5 @@
+import { useSelector, useDispatch } from "react-redux";
+
 const FeedbackButtons = ({ group, handleDispatch }) => {
   return <button onClick={() => handleDispatch(group)}>{group}</button>;
 };
@@ -11,11 +13,12 @@ const FeedbackResults = ({ group, groupState }) => {
   );
 };
 
-const App = ({ store }) => {
-  const appState = store.getState();
+const App = () => {
+  const feedback = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const handleDispatch = (group) => {
-    store.dispatch({ type: `${group.toUpperCase()}` });
+    dispatch({ type: `${group.toUpperCase()}` });
   };
 
   return (
@@ -38,7 +41,7 @@ const App = ({ store }) => {
               <FeedbackResults
                 key={group}
                 group={group}
-                groupState={appState[group]}
+                groupState={feedback[group]}
               />
             );
           })}
