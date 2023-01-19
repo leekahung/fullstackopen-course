@@ -5,6 +5,7 @@ const initialState = {
   timeoutID: "",
 };
 
+// Exercise 6.11
 const notificationSlice = createSlice({
   name: "notifications",
   initialState,
