@@ -37,7 +37,13 @@ const AnecdoteList = () => {
       return b.vote - a.vote;
     });
 
-    return sortedAnecdotes;
+    const filteredAnecdotes = state.filters
+      ? sortedAnecdotes.filter((a) =>
+          a.content.toLowerCase().includes(state.filters.toLowerCase())
+        )
+      : sortedAnecdotes;
+
+    return filteredAnecdotes;
   });
 
   return (

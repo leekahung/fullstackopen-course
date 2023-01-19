@@ -24,10 +24,15 @@ const AnecdoteForm = () => {
   };
 
   return (
-    <form onSubmit={handleAddAnecdote}>
-      <input name="anecdote" />
-      <button>add</button>
-    </form>
+    <>
+      <h1>create new</h1>
+      <form onSubmit={handleAddAnecdote}>
+        <div>
+          <input name="anecdote" />
+        </div>
+        <button>create</button>
+      </form>
+    </>
   );
 };
 
