@@ -2,11 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-import { createStore } from "redux";
 import { Provider } from "react-redux";
-import anecdoteReducer from "./reducers/anecdoteReducer";
-
-const store = createStore(anecdoteReducer);
+import store from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
