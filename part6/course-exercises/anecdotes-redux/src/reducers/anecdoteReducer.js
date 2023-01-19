@@ -37,7 +37,6 @@ const anecdoteReducer = (state = initialState, action) => {
   }
 };
 
-// Exercise 6.6
 export const addVote = (id) => {
   return {
     type: "VOTE",
