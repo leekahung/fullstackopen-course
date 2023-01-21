@@ -9,6 +9,7 @@ const notificationSlice = createSlice({
   name: "notifications",
   initialState,
   reducers: {
+    // Exercise 6.21
     setNotification(state, action) {
       if (state.timeoutID !== "") {
         clearTimeout(state.timeoutID);
