@@ -49,6 +49,11 @@
       "content": "My 4th anecdote to be added",
       "votes": 0,
       "id": "p_BzmP6"
+    },
+    {
+      "content": "Add this 5th anecdote",
+      "votes": 1,
+      "id": "BYJaFsl"
     }
   ]
 }
