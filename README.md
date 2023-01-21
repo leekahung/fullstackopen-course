@@ -16,8 +16,8 @@ Personal repo for FullStackOpen's Full Stack coursework for React, Redux, Node.j
 | Part 3  | Programming a server with NodeJS and Express | Completed/Submitted |
 | Part 4  | Testing Express servers, user administation | Completed/Submitted |
 | Part 5  | Testing React apps | Completed/Submitted |
-| Part 6  | State management with Redux | Redoing for Submission |
-| Part 7  | React router, custom hooks, styling app with CSS and webpack | Incomplete |
+| Part 6  | State management with Redux | Completed/Submitted |
+| Part 7  | React router, custom hooks, styling app with CSS and webpack | In Progress/Not Submitted |
 | Part 8  | GraphQL | Incomplete |
 | Part 9  | TypeScript |  Incomplete |
 | Part 10  | React Native | Incomplete |
