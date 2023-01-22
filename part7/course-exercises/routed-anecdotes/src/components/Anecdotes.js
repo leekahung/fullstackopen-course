@@ -1,8 +1,5 @@
 import { useSelector } from "react-redux";
-
-const Anecdote = ({ anecdote }) => {
-  return <li>{anecdote.content}</li>;
-};
+import { Link } from "react-router-dom";
 
 const Anecdotes = () => {
   const anecdotes = useSelector((state) => state.anecdotes);
@@ -12,7 +9,11 @@ const Anecdotes = () => {
       <h2>Anecdotes</h2>
       <ul>
         {anecdotes.map((a) => {
-          return <Anecdote key={a.id} anecdote={a} />;
+          return (
+            <li key={a.id}>
+              <Link to={`/anecdotes/${a.id}`}>{a.content}</Link>
+            </li>
+          );
         })}
       </ul>
     </>

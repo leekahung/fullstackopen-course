@@ -1,4 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom";
+import Anecdote from "./components/Anecdote";
 import Anecdotes from "./components/Anecdotes";
 import AnecdoteForm from "./components/AnecdoteForm";
 
@@ -25,6 +26,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Anecdotes />} />
         <Route path="/create" element={<AnecdoteForm />} />
+        <Route path="/anecdotes/:id" element={<Anecdote />} />
       </Routes>
 
       <footer>
