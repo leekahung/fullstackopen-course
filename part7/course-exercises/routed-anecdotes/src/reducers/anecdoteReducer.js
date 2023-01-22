@@ -13,7 +13,7 @@ const initialAnecdotes = anecdotesInitial.map((a) => {
   return {
     content: a,
     author: "author 1",
-    url: "some url",
+    url: "http://www.google.com",
     votes: 0,
     id: generateId(),
   };

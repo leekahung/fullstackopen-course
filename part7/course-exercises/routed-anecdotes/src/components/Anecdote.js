@@ -13,7 +13,10 @@ const Anecdote = () => {
       </h1>
       <p>has {anecdote.votes} votes</p>
       <p>
-        for more info see <a href="/">{anecdote.url}</a>
+        for more info see{" "}
+        <a href={anecdote.url} target="_blank" rel="noreferrer">
+          {anecdote.url}
+        </a>
       </p>
     </>
   );
