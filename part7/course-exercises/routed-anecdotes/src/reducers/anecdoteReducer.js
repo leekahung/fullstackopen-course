@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const anecdotesInitial = [
   "If it hurts, do it more often",
-  "Premature optimization is the route of all evil",
+  "Premature optimization is the root of all evil",
 ];
 
 const generateId = () => {

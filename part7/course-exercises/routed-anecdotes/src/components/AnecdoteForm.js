@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { addAnecdote } from "../reducers/anecdoteReducer";
+import { runNotification } from "../reducers/notificationReducer";
+import { useNavigate } from "react-router-dom";
 
 const AnecdoteInput = ({ anecdoteInput }) => {
   return (
@@ -16,6 +18,7 @@ const AnecdoteInput = ({ anecdoteInput }) => {
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAddAnecdote = (event) => {
     event.preventDefault();
@@ -30,6 +33,10 @@ const AnecdoteForm = () => {
     });
 
     dispatch(addAnecdote(newAnecdote));
+    dispatch(
+      runNotification(`a new anecdote "${newAnecdote.content}" is created!`, 5)
+    );
+    navigate("/");
   };
 
   return (

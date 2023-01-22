@@ -2,6 +2,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Anecdote from "./components/Anecdote";
 import Anecdotes from "./components/Anecdotes";
 import AnecdoteForm from "./components/AnecdoteForm";
+import Notifications from "./components/Notifications";
 
 const App = () => {
   const style = {
@@ -22,6 +23,7 @@ const App = () => {
           about
         </Link>
       </div>
+      <Notifications />
 
       <Routes>
         <Route path="/" element={<Anecdotes />} />
