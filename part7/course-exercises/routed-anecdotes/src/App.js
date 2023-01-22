@@ -28,7 +28,17 @@ const App = () => {
       </Routes>
 
       <footer>
-        <p>Anecdote app. See link for the source code.</p>
+        <p>
+          Anecdote app. See{" "}
+          <a
+            href="https://github.com/leekahung/fullstackopen-course/tree/main/part7/course-exercises/routed-anecdotes"
+            target="_blank"
+            rel="noreferrer"
+          >
+            this GitHub link
+          </a>{" "}
+          for the source code.
+        </p>
       </footer>
     </div>
   );

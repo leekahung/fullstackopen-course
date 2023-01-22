@@ -1,19 +1,18 @@
+import { useSelector } from "react-redux";
+
 const Anecdote = ({ anecdote }) => {
-  return <li>{anecdote}</li>;
+  return <li>{anecdote.content}</li>;
 };
 
 const Anecdotes = () => {
-  const anecdotesInitial = [
-    "If it hurts, do it more often",
-    "Premature optimization is the route of all evil",
-  ];
+  const anecdotes = useSelector((state) => state.anecdotes);
 
   return (
     <>
       <h2>Anecdotes</h2>
       <ul>
-        {anecdotesInitial.map((a) => {
-          return <Anecdote key={a} anecdote={a} />;
+        {anecdotes.map((a) => {
+          return <Anecdote key={a.id} anecdote={a} />;
         })}
       </ul>
     </>
