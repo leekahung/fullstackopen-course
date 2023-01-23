@@ -2,35 +2,22 @@ import { useDispatch } from "react-redux";
 import { addAnecdote } from "../reducers/anecdoteReducer";
 import { runNotification } from "../reducers/notificationReducer";
 import { useNavigate } from "react-router-dom";
-
-const AnecdoteInput = ({ anecdoteInput }) => {
-  return (
-    <>
-      <div>
-        <label>
-          {anecdoteInput === "url" ? "url for more info" : anecdoteInput}{" "}
-        </label>
-        <input name={anecdoteInput} />
-      </div>
-    </>
-  );
-};
+import { useField } from "../hooks";
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const content = useField("text");
+  const author = useField("text");
+  const url = useField("text");
 
   const handleAddAnecdote = (event) => {
     event.preventDefault();
-    const newAnecdote = {};
-
-    ["content", "author", "url"].forEach((formInput) => {
-      return (newAnecdote[formInput] = event.target[formInput].value);
-    });
-
-    ["content", "author", "url"].forEach((formInput) => {
-      return (event.target[formInput].value = "");
-    });
+    const newAnecdote = {
+      content: content.value,
+      author: author.value,
+      url: url.value,
+    };
 
     dispatch(addAnecdote(newAnecdote));
     dispatch(
@@ -43,11 +30,18 @@ const AnecdoteForm = () => {
     <>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleAddAnecdote} autoComplete="off">
-        {["content", "author", "url"].map((anecdoteInput) => {
-          return (
-            <AnecdoteInput key={anecdoteInput} anecdoteInput={anecdoteInput} />
-          );
-        })}
+        <div>
+          <label>content: </label>
+          <input {...content} />
+        </div>
+        <div>
+          <label>author: </label>
+          <input {...author} />
+        </div>
+        <div>
+          <label>url for more info: </label>
+          <input {...url} />
+        </div>
         <button>create</button>
       </form>
     </>
