@@ -7,9 +7,9 @@ import { useField } from "../hooks";
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const content = useField("text");
-  const author = useField("text");
-  const url = useField("text");
+  const { clearValue: clearContent, ...content } = useField("text");
+  const { clearValue: clearAuthor, ...author } = useField("text");
+  const { clearValue: clearUrl, ...url } = useField("text");
 
   const handleAddAnecdote = (event) => {
     event.preventDefault();
@@ -24,6 +24,13 @@ const AnecdoteForm = () => {
       runNotification(`a new anecdote "${newAnecdote.content}" is created!`, 5)
     );
     navigate("/");
+  };
+
+  const handleFormReset = (event) => {
+    event.preventDefault();
+    clearContent();
+    clearAuthor();
+    clearUrl();
   };
 
   return (
@@ -43,6 +50,7 @@ const AnecdoteForm = () => {
           <input {...url} />
         </div>
         <button>create</button>
+        <button onClick={handleFormReset}>reset</button>
       </form>
     </>
   );
