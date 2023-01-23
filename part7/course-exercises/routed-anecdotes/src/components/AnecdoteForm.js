@@ -7,6 +7,7 @@ import { useField } from "../hooks";
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // Exercise 7.6
   const { clearValue: clearContent, ...content } = useField("text");
   const { clearValue: clearAuthor, ...author } = useField("text");
   const { clearValue: clearUrl, ...url } = useField("text");
