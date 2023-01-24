@@ -1,39 +1,32 @@
 {
   "blogs": [
     {
-      "title": "new author",
-      "author": "new title",
+      "title": "new blog",
+      "author": "Alice",
       "url": "some url",
-      "votes": 0,
+      "likes": 0,
       "id": 1
     },
     {
-      "title": "2nd blog",
-      "author": "next author",
+      "title": "new blog",
+      "author": "Bob",
       "url": "some url",
-      "votes": 0,
+      "likes": 0,
       "id": 2
     },
     {
-      "title": "3rd blog",
-      "author": "that author ",
+      "title": "new blog",
+      "author": "Carl",
       "url": "some url",
-      "votes": 0,
+      "likes": 0,
       "id": 3
     },
     {
-      "title": "4th blog",
-      "author": "this author ",
+      "title": "new blog",
+      "author": "David",
       "url": "some url",
-      "votes": 0,
+      "likes": 0,
       "id": 4
-    },
-    {
-      "title": "new title",
-      "author": "wee wee",
-      "url": "epic url",
-      "votes": 0,
-      "id": 5
     }
   ]
 }

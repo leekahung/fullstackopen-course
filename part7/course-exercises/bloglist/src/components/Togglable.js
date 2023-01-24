@@ -22,7 +22,7 @@ const Togglable = forwardRef(
 
     return buttonLocation === "bottom" ? (
       <>
-        <div style={showWhenVisible}>
+        <div style={{ ...showWhenVisible, padding: "10px 0 0" }}>
           <button onClick={toggleVisibility}>
             {visible ? closeLabel : buttonLabel}
           </button>
@@ -42,5 +42,7 @@ const Togglable = forwardRef(
     );
   }
 );
+
+Togglable.displayName = "Togglable";
 
 export default Togglable;

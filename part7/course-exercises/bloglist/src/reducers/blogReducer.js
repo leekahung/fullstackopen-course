@@ -12,10 +12,14 @@ const blogSlice = createSlice({
     addBlog(state, action) {
       state.push(action.payload);
     },
+    voteBlog(state, action) {
+      const id = action.payload.id;
+      return state.map((b) => (b.id === id ? action.payload : b));
+    },
   },
 });
 
-export const { setBlogs, addBlog } = blogSlice.actions;
+export const { setBlogs, addBlog, voteBlog } = blogSlice.actions;
 
 export const initializeBlogs = () => {
   return async (dispatch) => {
@@ -24,7 +28,6 @@ export const initializeBlogs = () => {
   };
 };
 
-// Exercise 7.11
 export const createBlog = (objectToAdd) => {
   return async (dispatch) => {
     const blogObject = await blogService.createNew(objectToAdd);
@@ -33,6 +36,18 @@ export const createBlog = (objectToAdd) => {
       runNotification(
         `New blog "${blogObject.title}" by ${blogObject.author} is added!`,
         5
+      )
+    );
+  };
+};
+
+export const upvoteBlog = (objectToUpdate) => {
+  return async (dispatch) => {
+    const updatedObject = await blogService.updateObject(objectToUpdate);
+    dispatch(voteBlog(updatedObject));
+    dispatch(
+      runNotification(
+        `You liked blog "${updatedObject.title}" by ${updatedObject.likes}!`
       )
     );
   };

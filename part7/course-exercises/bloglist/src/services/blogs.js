@@ -10,11 +10,19 @@ const getAll = async () => {
 const createNew = async (newObject) => {
   const response = await axios.post(baseUrl, {
     ...newObject,
-    votes: 0,
+    likes: 0,
   });
   return response.data;
 };
 
-const blogService = { getAll, createNew };
+const updateObject = async (id, objectToUpdate) => {
+  const response = await axios.put(`${baseUrl}/${id}`, {
+    ...objectToUpdate,
+    likes: objectToUpdate.likes + 1,
+  });
+  return response.data;
+};
+
+const blogService = { getAll, createNew, updateObject };
 
 export default blogService;

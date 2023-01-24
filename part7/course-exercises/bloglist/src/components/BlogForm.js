@@ -1,8 +1,8 @@
-import { createBlog } from "../reducers/blogReducer";
 import { useDispatch } from "react-redux";
 import { useField } from "../hooks";
+import { createBlog } from "../reducers/blogReducer";
 
-const BlogForm = () => {
+const BlogForm = ({ blogFormRef }) => {
   const dispatch = useDispatch();
   const { clearValue: clearTitle, ...title } = useField("text");
   const { clearValue: clearAuthor, ...author } = useField("text");
@@ -20,6 +20,9 @@ const BlogForm = () => {
     clearTitle();
     clearAuthor();
     clearUrl();
+    if (blogFormRef) {
+      blogFormRef.current.toggleVisibility();
+    }
   };
 
   const style = {
