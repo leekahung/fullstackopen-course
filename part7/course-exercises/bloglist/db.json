@@ -4,28 +4,28 @@
       "title": "new blog",
       "author": "Alice",
       "url": "some url",
-      "likes": 0,
+      "likes": 3,
       "id": 1
     },
     {
       "title": "new blog",
       "author": "Bob",
       "url": "some url",
-      "likes": 0,
+      "likes": 1,
       "id": 2
     },
     {
       "title": "new blog",
       "author": "Carl",
       "url": "some url",
-      "likes": 0,
+      "likes": 2,
       "id": 3
     },
     {
       "title": "new blog",
       "author": "David",
       "url": "some url",
-      "likes": 0,
+      "likes": 2,
       "id": 4
     }
   ]

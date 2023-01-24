@@ -15,7 +15,8 @@ const createNew = async (newObject) => {
   return response.data;
 };
 
-const updateObject = async (id, objectToUpdate) => {
+const updateObject = async (objectToUpdate) => {
+  const id = objectToUpdate.id;
   const response = await axios.put(`${baseUrl}/${id}`, {
     ...objectToUpdate,
     likes: objectToUpdate.likes + 1,
@@ -23,6 +24,11 @@ const updateObject = async (id, objectToUpdate) => {
   return response.data;
 };
 
-const blogService = { getAll, createNew, updateObject };
+const removeObject = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`);
+  return response.data;
+};
+
+const blogService = { getAll, createNew, updateObject, removeObject };
 
 export default blogService;
