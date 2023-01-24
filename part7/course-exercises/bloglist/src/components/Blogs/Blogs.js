@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
-import Togglable from "./Togglable";
+import Togglable from "../Togglable";
 import BlogForm from "./BlogForm";
-import { upvoteBlog, removeBlog } from "../reducers/blogReducer";
+import { upvoteBlog, removeBlog } from "../../reducers/blogReducer";
 
 const Blog = ({ blog }) => {
   const dispatch = useDispatch();
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   const style = {
     padding: "10px",
@@ -32,14 +33,19 @@ const Blog = ({ blog }) => {
         <div>{blog.url}</div>
         <div>
           likes {blog.likes}{" "}
-          <button onClick={() => handleVoteBlog(blog)}>like</button>
+          {loggedUser.token ? (
+            <button onClick={() => handleVoteBlog(blog)}>like</button>
+          ) : null}
         </div>
-        <button
-          style={styleDelete}
-          onClick={() => handleDeleteBlog(blog.id, blog)}
-        >
-          delete
-        </button>
+        <div>{blog.user.name}</div>
+        {loggedUser.token ? (
+          <button
+            style={styleDelete}
+            onClick={() => handleDeleteBlog(blog.id, blog)}
+          >
+            delete
+          </button>
+        ) : null}
       </Togglable>
     </div>
   );

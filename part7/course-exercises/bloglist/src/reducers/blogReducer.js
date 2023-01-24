@@ -47,27 +47,37 @@ export const createBlog = (objectToAdd) => {
 
 export const upvoteBlog = (objectToUpdate) => {
   return async (dispatch) => {
-    const updatedObject = await blogService.updateObject(objectToUpdate);
-    dispatch(voteBlog(updatedObject));
-    dispatch(
-      runNotification(
-        `You liked blog "${updatedObject.title}" by ${updatedObject.author}!`,
-        5
-      )
-    );
+    try {
+      const updatedObject = await blogService.updateObject(objectToUpdate);
+      dispatch(voteBlog(updatedObject));
+      dispatch(
+        runNotification(
+          `You liked blog "${updatedObject.title}" by ${updatedObject.author}!`,
+          5
+        )
+      );
+    } catch (error) {
+      dispatch(runNotification("Only app users can submit likes to posts", 5));
+    }
   };
 };
 
 export const removeBlog = (id, blog) => {
   return async (dispatch) => {
-    await blogService.removeObject(id);
-    dispatch(deleteBlog(id));
-    dispatch(
-      runNotification(
-        `Blog "${blog.title}" by ${blog.author} has been removed`,
-        5
-      )
-    );
+    try {
+      await blogService.removeObject(id);
+      dispatch(deleteBlog(id));
+      dispatch(
+        runNotification(
+          `Blog "${blog.title}" by ${blog.author} has been removed`,
+          5
+        )
+      );
+    } catch (error) {
+      dispatch(
+        runNotification("This post can only be deleted by original poster", 5)
+      );
+    }
   };
 };
 

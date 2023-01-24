@@ -1,32 +1,18 @@
 {
-  "blogs": [
+  "blogs": [],
+  "users": [
     {
-      "title": "new blog",
-      "author": "Alice",
-      "url": "some url",
-      "likes": 3,
+      "username": "aceui",
+      "name": "Alice Ceui",
+      "passwordHash": "test1specialHash",
       "id": 1
     },
     {
-      "title": "new blog",
-      "author": "Bob",
-      "url": "some url",
-      "likes": 1,
+      "username": "bobIsCool",
+      "name": "Bobby Lee",
+      "passwordHash": "test2specialHash",
       "id": 2
-    },
-    {
-      "title": "new blog",
-      "author": "Carl",
-      "url": "some url",
-      "likes": 2,
-      "id": 3
-    },
-    {
-      "title": "new blog",
-      "author": "David",
-      "url": "some url",
-      "likes": 2,
-      "id": 4
     }
-  ]
+  ],
+  "loggeduser": []
 }

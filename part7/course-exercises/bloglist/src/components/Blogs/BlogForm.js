@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { useField } from "../hooks";
-import { createBlog } from "../reducers/blogReducer";
+import { useField } from "../../hooks";
+import { createBlog } from "../../reducers/blogReducer";
 
 const BlogForm = ({ blogFormRef }) => {
   const dispatch = useDispatch();
