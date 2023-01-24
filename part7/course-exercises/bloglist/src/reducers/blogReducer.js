@@ -24,6 +24,7 @@ export const initializeBlogs = () => {
   };
 };
 
+// Exercise 7.11
 export const createBlog = (objectToAdd) => {
   return async (dispatch) => {
     const blogObject = await blogService.createNew(objectToAdd);
