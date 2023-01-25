@@ -16,7 +16,7 @@ const errorHandler = (error, _request, response, next) => {
   switch (error.name) {
     case "CastError":
       return response.status(400).json({
-        error: "Invalid id",
+        error: "CastError: Invalid id",
       });
     case "ValidationError":
       return response.status(400).json({
@@ -24,11 +24,11 @@ const errorHandler = (error, _request, response, next) => {
       });
     case "JsonWebTokenError":
       return response.status(401).json({
-        error: "Invalid token or missing",
+        error: "JsonWebTokenError: Invalid token or missing",
       });
-    case "ExpiredTokenError":
-      return response.status(401).json({
-        error: "Expired token",
+    case "TokenExpiredError":
+      return response.status(401).send({
+        error: "TokenExpiredError: Expired token",
       });
     default:
       break;

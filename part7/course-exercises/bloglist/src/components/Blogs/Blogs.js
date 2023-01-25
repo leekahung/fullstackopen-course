@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import Togglable from "../Togglable";
 import BlogForm from "./BlogForm";
-import { upvoteBlog, removeBlog } from "../../reducers/blogReducer";
+import { removeBlog } from "../../reducers/blogReducer";
 
 const Blog = ({ blog }) => {
   const dispatch = useDispatch();
@@ -18,49 +19,40 @@ const Blog = ({ blog }) => {
     marginTop: "2px",
   };
 
-  const handleVoteBlog = (blog) => {
-    dispatch(upvoteBlog(blog));
-  };
-
   const handleDeleteBlog = (id, blog) => {
     dispatch(removeBlog(id, blog));
   };
 
   return (
     <div style={style}>
-      {blog.title} {blog.author}{" "}
-      <Togglable buttonLabel="view" closeLabel="close" buttonLocation="top">
-        <div>{blog.url}</div>
-        <div>
-          likes {blog.likes}{" "}
-          {loggedUser.token ? (
-            <button onClick={() => handleVoteBlog(blog)}>like</button>
-          ) : null}
-        </div>
-        <div>{blog.user.name}</div>
-        {loggedUser.token ? (
-          <button
-            style={styleDelete}
-            onClick={() => handleDeleteBlog(blog.id, blog)}
-          >
-            delete
-          </button>
-        ) : null}
-      </Togglable>
+      <Link to={`/blogs/${blog.id}`}>
+        {blog.title} {blog.author}
+      </Link>{" "}
+      {loggedUser.token ? (
+        <button
+          style={styleDelete}
+          onClick={() => handleDeleteBlog(blog.id, blog)}
+        >
+          delete
+        </button>
+      ) : null}
     </div>
   );
 };
 
 const Blogs = () => {
   const blogs = useSelector((state) => state.blogs);
+  const loggedUser = useSelector((state) => state.loggedUser);
   const blogFormRef = useRef();
 
   return (
     <>
-      <Togglable buttonLabel="create new blog" ref={blogFormRef}>
-        <h2>create new blog</h2>
-        <BlogForm blogFormRef={blogFormRef} />
-      </Togglable>
+      {loggedUser.token ? (
+        <Togglable buttonLabel="create new blog" ref={blogFormRef}>
+          <h2>create new blog</h2>
+          <BlogForm blogFormRef={blogFormRef} />
+        </Togglable>
+      ) : null}
       {blogs.map((b) => {
         return <Blog key={b.id} blog={b} />;
       })}

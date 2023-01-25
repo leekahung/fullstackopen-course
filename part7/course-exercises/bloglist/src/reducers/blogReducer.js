@@ -34,14 +34,36 @@ export const initializeBlogs = () => {
 
 export const createBlog = (objectToAdd) => {
   return async (dispatch) => {
-    const blogObject = await blogService.createNew(objectToAdd);
-    dispatch(addBlog(blogObject));
-    dispatch(
-      runNotification(
-        `New blog "${blogObject.title}" by ${blogObject.author} is added!`,
-        5
-      )
-    );
+    try {
+      const blogObject = await blogService.createNew(objectToAdd);
+      dispatch(addBlog(blogObject));
+      dispatch(
+        runNotification(
+          `New blog "${blogObject.title}" by ${blogObject.author} is added!`,
+          5
+        )
+      );
+    } catch (error) {
+      if (error.response.data.error.includes("TokenExpiredError")) {
+        window.localStorage.removeItem("loggedUser");
+        window.location.reload();
+        dispatch(
+          runNotification(
+            `${error.response.data.error}, please log back in for a new token`,
+            5
+          )
+        );
+      } else if (error.response.data.error.includes("JsonWebTokenError")) {
+        dispatch(
+          runNotification(
+            `${error.response.data.error}, please log back in for a new token`,
+            5
+          )
+        );
+      } else {
+        dispatch(runNotification("Only users with valid token can post", 5));
+      }
+    }
   };
 };
 
@@ -57,7 +79,25 @@ export const upvoteBlog = (objectToUpdate) => {
         )
       );
     } catch (error) {
-      dispatch(runNotification("Only app users can submit likes to posts", 5));
+      if (error.response.data.error.includes("TokenExpiredError")) {
+        window.localStorage.removeItem("loggedUser");
+        window.location.reload();
+        dispatch(
+          runNotification(
+            `${error.response.data.error}, please log back in for a new token`,
+            5
+          )
+        );
+      } else if (error.response.data.error.includes("JsonWebTokenError")) {
+        dispatch(
+          runNotification(
+            `${error.response.data.error}, please log back in for a new token`,
+            5
+          )
+        );
+      } else {
+        dispatch(runNotification("Only users can like existing posts", 5));
+      }
     }
   };
 };
@@ -74,9 +114,27 @@ export const removeBlog = (id, blog) => {
         )
       );
     } catch (error) {
-      dispatch(
-        runNotification("This post can only be deleted by original poster", 5)
-      );
+      if (error.response.data.error.includes("TokenExpiredError")) {
+        window.localStorage.removeItem("loggedUser");
+        window.location.reload();
+        dispatch(
+          runNotification(
+            `${error.response.data.error}, please log back in for a new token`,
+            5
+          )
+        );
+      } else if (error.response.data.error.includes("JsonWebTokenError")) {
+        dispatch(
+          runNotification(
+            `${error.response.data.error}, please log back in for a new token`,
+            5
+          )
+        );
+      } else {
+        dispatch(
+          runNotification("Only original post user can delete this message", 5)
+        );
+      }
     }
   };
 };
