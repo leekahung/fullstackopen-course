@@ -24,6 +24,10 @@ const Login = () => {
     dispatch(logout(user));
   };
 
+  const style = {
+    margin: "10px 0",
+  };
+
   return (
     <>
       {!loggedUser.token ? (
@@ -40,7 +44,7 @@ const Login = () => {
         </form>
       ) : (
         <>
-          <div>{loggedUser.name} logged in</div>
+          <div style={style}>{loggedUser.name} logged in</div>
           <button onClick={() => handleLogout(loggedUser)}>logout</button>
         </>
       )}
