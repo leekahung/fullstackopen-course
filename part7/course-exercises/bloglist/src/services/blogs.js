@@ -30,14 +30,18 @@ const updateObject = async (objectToUpdate) => {
   const id = objectToUpdate.id;
   const response = await axios.put(
     `${baseUrl}/${id}`,
-    { ...objectToUpdate, likes: objectToUpdate.likes + 1 },
+    { likes: objectToUpdate.likes + 1 },
     config
   );
   return response.data;
 };
 
 const removeObject = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
+  const config = {
+    headers: { Authorization: token },
+  };
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
   return response.data;
 };
 

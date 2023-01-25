@@ -28,9 +28,9 @@ mongoose.connect(config.MONGODB_URI).then((response) => {
 app.use(middlewareLogger);
 app.use(tokenExtractor);
 
-app.use("/api/blogs", blogRouter);
-app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
+app.use("/api/users", userRouter);
+app.use("/api/blogs", blogRouter);
 
 app.use(errorHandler);
 

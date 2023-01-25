@@ -13,22 +13,25 @@ const middlewareLogger = morgan(`
 const errorHandler = (error, _request, response, next) => {
   console.log(error.message);
 
-  if (error.name === "CaseError") {
-    return response.status(400).json({
-      error: "Invalid id",
-    });
-  } else if (error.name === "ValidationError") {
-    return response.status(400).json({
-      error: error.message,
-    });
-  } else if (error.name === "JsonWebTokenError") {
-    return response.status(401).json({
-      error: "Invalid or missing token",
-    });
-  } else if (error.name === "ExpiredTokenError") {
-    return response.status(401).json({
-      error: "Expired token",
-    });
+  switch (error.name) {
+    case "CastError":
+      return response.status(400).json({
+        error: "Invalid id",
+      });
+    case "ValidationError":
+      return response.status(400).json({
+        error: error.message,
+      });
+    case "JsonWebTokenError":
+      return response.status(401).json({
+        error: "Invalid token or missing",
+      });
+    case "ExpiredTokenError":
+      return response.status(401).json({
+        error: "Expired token",
+      });
+    default:
+      break;
   }
 
   next(error);

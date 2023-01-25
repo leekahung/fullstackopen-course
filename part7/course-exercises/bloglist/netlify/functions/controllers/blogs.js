@@ -11,14 +11,17 @@ blogRouter.get("/", async (_request, response) => {
 });
 
 blogRouter.get("/:id", async (request, response) => {
-  const blog = await Blog.findById(request.params.id);
+  const blog = await Blog.findById(request.params.id).populate("user", {
+    username: 1,
+    name: 1,
+  });
   if (blog) {
-    response.json(blog);
-  } else {
-    response.status(400).json({
-      error: "Blog does not exist",
-    });
+    return response.json(blog);
   }
+
+  response.status(400).json({
+    error: "Blog does not exist",
+  });
 });
 
 blogRouter.post("/", userExtractor, async (request, response) => {
@@ -74,15 +77,15 @@ blogRouter.delete("/:id", userExtractor, async (request, response) => {
 
   if (user._id.toString() === blogToDelete.user.toString()) {
     await Blog.findByIdAndRemove(request.params.id);
-    user.blogs = user.blog.filter((b) => b.id !== request.params.id);
+    user.blogs = user.blogs.filter((b) => b.id !== request.params.id);
     await user.save();
 
     return response.status(204).end();
-  } else {
-    return response.status(401).json({
-      error: "Only original blog post user can delete this blog",
-    });
   }
+
+  response.status(401).json({
+    error: "Only original blog post user can delete this blog",
+  });
 });
 
 module.exports = blogRouter;

@@ -17,13 +17,14 @@ userRouter.get("/:id", async (request, response) => {
 
   if (request.query.loginToken) {
     checkUser = await User.findById(request.params.id);
+
     if (checkUser.loginToken !== request.query.loginToken) {
       return response.status(401).json({
         error: "Mismatched tokens",
       });
-    } else {
-      return response.status(200).end();
     }
+
+    return response.status(200).end();
   }
 
   const user = await User.findById(request.params.id).populate("blogs", {
@@ -34,12 +35,12 @@ userRouter.get("/:id", async (request, response) => {
   });
 
   if (user) {
-    response.json(user);
-  } else {
-    response.status(404).json({
-      error: "User not found",
-    });
+    return response.json(user);
   }
+
+  response.status(404).json({
+    error: "User not found",
+  });
 });
 
 userRouter.post("/", async (request, response) => {
