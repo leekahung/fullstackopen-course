@@ -52,7 +52,7 @@ blogRouter.put("/:id", async (request, response) => {
     request.params.id,
     { $push: { comments: request.body.comment } },
     { new: true }
-  );
+  ).populate("user", { username: 1, name: 1 });
 
   response.json(updateBlogComments);
 });
