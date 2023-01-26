@@ -8,13 +8,14 @@ import User from "./components/Users/User";
 import Notifications from "./components/Notifications";
 import { initializeUsers } from "./reducers/userReducer";
 import { initializeBlogs } from "./reducers/blogReducer";
-import { initializeLoggedUser } from "./reducers/loggeduserReducer";
-import { Routes, Route, useMatch } from "react-router-dom";
+import { initializeLoggedUser, logout } from "./reducers/loggeduserReducer";
+import { Routes, Route, useMatch, Link } from "react-router-dom";
 
 const App = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
   const blogs = useSelector((state) => state.blogs);
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   useEffect(() => {
     dispatch(initializeUsers());
@@ -32,12 +33,42 @@ const App = () => {
     ? blogs.find((u) => u.id === matchBlog.params.id)
     : null;
 
+  const style = {
+    margin: "0 5px",
+  };
+
+  const styleNavbar = {
+    marginBottom: "20px",
+    backgroundColor: "lightgrey",
+    padding: "5px",
+  };
+
+  const handleLogout = (user) => {
+    dispatch(logout(user));
+  };
+
   return (
     <>
       <div className="App">
+        <div style={styleNavbar}>
+          <Link style={style} to="/">
+            blogs
+          </Link>
+          <Link style={style} to="/users">
+            users
+          </Link>
+          {loggedUser.token ? (
+            <span style={style}>
+              {loggedUser.name} logged in{" "}
+              <button style={style} onClick={() => handleLogout(loggedUser)}>
+                logout
+              </button>
+            </span>
+          ) : null}
+        </div>
+        <Login />
         <h1>blogs</h1>
         <Notifications />
-        <Login />
       </div>
 
       <Routes>

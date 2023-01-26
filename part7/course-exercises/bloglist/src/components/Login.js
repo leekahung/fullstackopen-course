@@ -20,10 +20,6 @@ const Login = () => {
     clearPassword();
   };
 
-  const handleLogout = (user) => {
-    dispatch(logout(user));
-  };
-
   const style = {
     margin: "10px 0",
   };
@@ -40,14 +36,9 @@ const Login = () => {
             <label>password: </label>
             <input {...password} />
           </div>
-          <button>login</button>
+          <button style={style}>login</button>
         </form>
-      ) : (
-        <>
-          <div style={style}>{loggedUser.name} logged in</div>
-          <button onClick={() => handleLogout(loggedUser)}>logout</button>
-        </>
-      )}
+      ) : null}
     </>
   );
 };
