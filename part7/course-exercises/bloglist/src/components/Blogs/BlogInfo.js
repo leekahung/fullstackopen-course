@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useField } from "../../hooks";
 import { upvoteBlog, commentBlog } from "../../reducers/blogReducer";
 
@@ -34,6 +34,7 @@ const Comments = ({ blog }) => {
 
 const BlogInfo = ({ blog }) => {
   const dispatch = useDispatch();
+  const loggedUser = useSelector((state) => state.loggedUser);
   const handleVoteBlog = (blog) => {
     dispatch(upvoteBlog(blog));
   };
@@ -48,7 +49,9 @@ const BlogInfo = ({ blog }) => {
       <a href=".">{blog.url}</a>
       <div>
         {blog.likes} likes{" "}
-        <button onClick={() => handleVoteBlog(blog)}>like</button>
+        {loggedUser.token ? (
+          <button onClick={() => handleVoteBlog(blog)}>like</button>
+        ) : null}
       </div>
       <div>added by {blog.user.name}</div>
       <Comments blog={blog} />

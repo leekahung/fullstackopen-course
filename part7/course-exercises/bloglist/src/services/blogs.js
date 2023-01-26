@@ -23,7 +23,7 @@ const createNew = async (newObject) => {
 };
 
 const createComment = async (id, newComment) => {
-  const response = await axios.put(`${baseUrl}/${id}`, newComment);
+  const response = await axios.post(`${baseUrl}/${id}/comments`, newComment);
   return response.data;
 };
 
