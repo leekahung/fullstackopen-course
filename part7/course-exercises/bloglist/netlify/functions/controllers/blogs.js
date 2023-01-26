@@ -31,6 +31,7 @@ blogRouter.post("/", userExtractor, async (request, response) => {
   const newBlog = new Blog({
     ...body,
     likes: 0,
+    comments: [],
     user: user._id,
   });
 
@@ -44,6 +45,16 @@ blogRouter.post("/", userExtractor, async (request, response) => {
   );
 
   response.status(201).json(returnedSavedBlog);
+});
+
+blogRouter.put("/:id", async (request, response) => {
+  const updateBlogComments = await Blog.findByIdAndUpdate(
+    request.params.id,
+    { $push: { comments: request.body.comment } },
+    { new: true }
+  );
+
+  response.json(updateBlogComments);
 });
 
 blogRouter.put("/:id", userExtractor, async (request, response) => {

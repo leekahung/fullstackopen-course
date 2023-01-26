@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useField } from "../hooks";
-import { login, logout } from "../reducers/loggeduserReducer";
+import { login } from "../reducers/loggeduserReducer";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,17 +27,20 @@ const Login = () => {
   return (
     <>
       {!loggedUser.token ? (
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>username: </label>
-            <input {...username} />
-          </div>
-          <div>
-            <label>password: </label>
-            <input {...password} />
-          </div>
-          <button style={style}>login</button>
-        </form>
+        <>
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <div>
+              <label>username: </label>
+              <input {...username} />
+            </div>
+            <div>
+              <label>password: </label>
+              <input {...password} />
+            </div>
+            <button style={style}>login</button>
+          </form>
+        </>
       ) : null}
     </>
   );

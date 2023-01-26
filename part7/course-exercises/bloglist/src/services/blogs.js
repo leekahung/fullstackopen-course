@@ -22,6 +22,11 @@ const createNew = async (newObject) => {
   return response.data;
 };
 
+const createComment = async (id, newComment) => {
+  const response = await axios.put(`${baseUrl}/${id}`, newComment);
+  return response.data;
+};
+
 const updateObject = async (objectToUpdate) => {
   const config = {
     headers: { Authorization: token },
@@ -45,6 +50,13 @@ const removeObject = async (id) => {
   return response.data;
 };
 
-const blogService = { getAll, createNew, updateObject, removeObject, setToken };
+const blogService = {
+  getAll,
+  createNew,
+  createComment,
+  updateObject,
+  removeObject,
+  setToken,
+};
 
 export default blogService;

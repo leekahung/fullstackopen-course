@@ -9,7 +9,7 @@ import Notifications from "./components/Notifications";
 import { initializeUsers } from "./reducers/userReducer";
 import { initializeBlogs } from "./reducers/blogReducer";
 import { initializeLoggedUser, logout } from "./reducers/loggeduserReducer";
-import { Routes, Route, useMatch, Link } from "react-router-dom";
+import { Routes, Route, useMatch, Link, useLocation } from "react-router-dom";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,11 +17,13 @@ const App = () => {
   const blogs = useSelector((state) => state.blogs);
   const loggedUser = useSelector((state) => state.loggedUser);
 
+  const location = useLocation();
+
   useEffect(() => {
     dispatch(initializeUsers());
     dispatch(initializeBlogs());
     dispatch(initializeLoggedUser());
-  }, [dispatch]);
+  }, [dispatch, location.key]);
 
   const matchUser = useMatch("/users/:id");
   const user = matchUser
