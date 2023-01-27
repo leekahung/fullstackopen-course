@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useField } from "../../hooks";
 import { createBlog } from "../../reducers/blogReducer";
+import { StyledForm } from "../StyledComponents/Form/Form.styles";
+import { StyledButton } from "../StyledComponents/Button/Button.styles";
 
 const BlogForm = ({ blogFormRef }) => {
   const dispatch = useDispatch();
@@ -25,30 +27,22 @@ const BlogForm = ({ blogFormRef }) => {
     }
   };
 
-  const style = {
-    margin: "5px 0",
-  };
-
-  const buttonStyle = {
-    margin: "5px 0 10px",
-  };
-
   return (
-    <form onSubmit={handleAddBlog}>
-      <div style={style}>
+    <StyledForm onSubmit={handleAddBlog}>
+      <div>
         <label>title: </label>
         <input {...title} />
       </div>
-      <div style={style}>
+      <div>
         <label>author: </label>
         <input {...author} />
       </div>
-      <div style={style}>
+      <div>
         <label>url: </label>
         <input {...url} />
       </div>
-      <button style={buttonStyle}>create</button>
-    </form>
+      <StyledButton>create</StyledButton>
+    </StyledForm>
   );
 };
 

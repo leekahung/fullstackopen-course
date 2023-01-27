@@ -1,47 +1,45 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
+import { StyledButton } from "./StyledComponents/Button/Button.styles";
 
-const Togglable = forwardRef(
-  (
-    { buttonLabel, closeLabel = "cancel", buttonLocation = "bottom", children },
-    refs
-  ) => {
-    const [visible, setVisible] = useState(false);
+const Togglable = forwardRef(({ buttonLabel, closeLabel = "cancel", buttonLocation = "bottom", children }, refs) => {
+  const [visible, setVisible] = useState(false);
 
-    const hideWhenVisible = { display: visible ? "" : "none" };
-    const showWhenVisible = { display: visible ? "none" : "" };
+  const hideWhenVisible = { display: visible ? "" : "none" };
+  const showWhenVisible = { display: visible ? "none" : "" };
 
-    const toggleVisibility = () => {
-      setVisible(!visible);
+  const toggleVisibility = () => {
+    setVisible(!visible);
+  };
+
+  useImperativeHandle(refs, () => {
+    return {
+      toggleVisibility,
     };
+  });
 
-    useImperativeHandle(refs, () => {
-      return {
-        toggleVisibility,
-      };
-    });
-
-    return buttonLocation === "bottom" ? (
-      <>
-        <div style={{ ...showWhenVisible, padding: "10px 0 0" }}>
-          <button onClick={toggleVisibility}>
-            {visible ? closeLabel : buttonLabel}
-          </button>
-        </div>
-        <div style={hideWhenVisible}>
-          {children}
-          <button onClick={toggleVisibility}>{closeLabel}</button>
-        </div>
-      </>
-    ) : (
-      <>
-        <button onClick={toggleVisibility}>
+  return buttonLocation === "bottom" ? (
+    <>
+      <div style={showWhenVisible}>
+        <StyledButton onClick={toggleVisibility} variant="toggler">
           {visible ? closeLabel : buttonLabel}
-        </button>
-        <div style={hideWhenVisible}>{children}</div>
-      </>
-    );
-  }
-);
+        </StyledButton>
+      </div>
+      <div style={hideWhenVisible}>
+        {children}
+        <StyledButton onClick={toggleVisibility} variant="toggler">
+          {closeLabel}
+        </StyledButton>
+      </div>
+    </>
+  ) : (
+    <>
+      <StyledButton onClick={toggleVisibility} variant="toggler">
+        {visible ? closeLabel : buttonLabel}
+      </StyledButton>
+      <div style={hideWhenVisible}>{children}</div>
+    </>
+  );
+});
 
 Togglable.displayName = "Togglable";
 

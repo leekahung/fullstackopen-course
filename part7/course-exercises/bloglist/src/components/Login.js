@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useField } from "../hooks";
 import { login } from "../reducers/loggeduserReducer";
+import { StyledButton } from "./StyledComponents/Button/Button.styles";
+import { StyledForm } from "./StyledComponents/Form/Form.styles";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -20,16 +22,12 @@ const Login = () => {
     clearPassword();
   };
 
-  const style = {
-    margin: "10px 0",
-  };
-
   return (
     <>
       {!loggedUser.token ? (
         <>
           <h2>Login</h2>
-          <form onSubmit={handleLogin}>
+          <StyledForm onSubmit={handleLogin}>
             <div>
               <label>username: </label>
               <input {...username} />
@@ -38,8 +36,8 @@ const Login = () => {
               <label>password: </label>
               <input {...password} />
             </div>
-            <button style={style}>login</button>
-          </form>
+            <StyledButton>login</StyledButton>
+          </StyledForm>
         </>
       ) : null}
     </>

@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useField } from "../../hooks";
 import { upvoteBlog, commentBlog } from "../../reducers/blogReducer";
+import { StyledBlogInfo } from "../StyledComponents/Blog/Blog.styles";
+import { StyledButton } from "../StyledComponents/Button/Button.styles";
+import { StyledForm } from "../StyledComponents/Form/Form.styles";
 
 const Comments = ({ blog }) => {
   const dispatch = useDispatch();
@@ -18,9 +21,12 @@ const Comments = ({ blog }) => {
   return (
     <>
       <h3>comments</h3>
-      <form onSubmit={handleAddComment}>
-        <input {...comment} /> <button>add comment</button>
-      </form>
+      <StyledForm onSubmit={handleAddComment} variant="comments">
+        <div>
+          <input {...comment} />
+        </div>
+        <StyledButton>add comment</StyledButton>
+      </StyledForm>
       <ul>
         {blog.comments
           ? blog.comments.map((comment, index) => {
@@ -44,18 +50,17 @@ const BlogInfo = ({ blog }) => {
   }
 
   return (
-    <div>
-      <h1>{blog.title}</h1>
-      <a href=".">{blog.url}</a>
-      <div>
-        {blog.likes} likes{" "}
-        {loggedUser.token ? (
-          <button onClick={() => handleVoteBlog(blog)}>like</button>
-        ) : null}
+    <StyledBlogInfo>
+      <h2>{blog.title}</h2>
+      <a href="." className="blog-info">
+        {blog.url}
+      </a>
+      <div className="blog-info">
+        {blog.likes} likes {loggedUser.token ? <StyledButton onClick={() => handleVoteBlog(blog)}>like</StyledButton> : null}
       </div>
-      <div>added by {blog.user.name}</div>
+      <div className="blog-info">added by {blog.user.name}</div>
       <Comments blog={blog} />
-    </div>
+    </StyledBlogInfo>
   );
 };
 

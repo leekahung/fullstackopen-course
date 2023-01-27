@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useField } from "../../hooks";
 import { createUser } from "../../reducers/userReducer";
+import { StyledButton } from "../StyledComponents/Button/Button.styles";
+import { StyledForm } from "../StyledComponents/Form/Form.styles";
 
 const UserForm = () => {
   const dispatch = useDispatch();
@@ -22,31 +24,23 @@ const UserForm = () => {
     clearName();
     clearPassword();
   };
-
-  const style = {
-    margin: "5px 0",
-  };
-
-  const buttonStyle = {
-    margin: "5px 0 10px",
-  };
-
   return (
-    <form onSubmit={handleAddUser}>
-      <div style={style}>
+    <StyledForm onSubmit={handleAddUser}>
+      <h2>create new user</h2>
+      <div>
         <label>username: </label>
         <input {...username} />
       </div>
-      <div style={style}>
+      <div>
         <label>name: </label>
         <input {...name} />
       </div>
-      <div style={style}>
+      <div>
         <label>password: </label>
         <input {...password} />
       </div>
-      <button style={buttonStyle}>create</button>
-    </form>
+      <StyledButton>create</StyledButton>
+    </StyledForm>
   );
 };
 

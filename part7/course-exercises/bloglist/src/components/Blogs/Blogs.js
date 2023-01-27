@@ -4,39 +4,24 @@ import { Link } from "react-router-dom";
 import Togglable from "../Togglable";
 import BlogForm from "./BlogForm";
 import { removeBlog } from "../../reducers/blogReducer";
+import { StyledButton } from "../StyledComponents/Button/Button.styles";
+import { StyledBlog } from "../StyledComponents/Blog/Blog.styles";
 
 const Blog = ({ blog }) => {
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.loggedUser);
-
-  const style = {
-    padding: "10px",
-    margin: "10px 0",
-    border: "1px solid",
-  };
-
-  const styleDelete = {
-    marginTop: "2px",
-  };
 
   const handleDeleteBlog = (id, blog) => {
     dispatch(removeBlog(id, blog));
   };
 
   return (
-    <div style={style}>
+    <StyledBlog>
       <Link to={`/blogs/${blog.id}`}>
         {blog.title} {blog.author}
       </Link>{" "}
-      {loggedUser.token ? (
-        <button
-          style={styleDelete}
-          onClick={() => handleDeleteBlog(blog.id, blog)}
-        >
-          delete
-        </button>
-      ) : null}
-    </div>
+      {loggedUser.token ? <StyledButton onClick={() => handleDeleteBlog(blog.id, blog)}>delete</StyledButton> : null}
+    </StyledBlog>
   );
 };
 
